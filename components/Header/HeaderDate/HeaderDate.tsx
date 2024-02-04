@@ -4,7 +4,7 @@ import { getTodaysMonthAndYear } from '../../../utils/dateUtils'
 
 const HeaderDate = () => {
   const date = getTodaysMonthAndYear()
-  return <span>{date}</span>
+  return <div className="flex items-center">{date}</div>
 }
 
 export default HeaderDate
