@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import Button from '../Buttons/Button/Button'
 import IconButton from '../Buttons/IconButton/IconButton'
@@ -6,10 +6,14 @@ import IconButton from '../Buttons/IconButton/IconButton'
 import HeaderDate from './HeaderDate/HeaderDate'
 import Logo from './Logo/Logo'
 
-const Header = () => {
+interface HeaderPropsType {
+  onClickToggle: React.MouseEventHandler<HTMLButtonElement>
+}
+
+const Header: FC<HeaderPropsType> = ({ onClickToggle }) => {
   return (
-    <div className="flex">
-      <IconButton type="burger" />
+    <div className="flex  border-b border-gray-300 p-2">
+      <IconButton type="burger" onClick={onClickToggle} />
       <Logo />
       <Button title="Today" />
       <IconButton type="backArrow" />

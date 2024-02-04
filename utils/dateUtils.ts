@@ -1,5 +1,9 @@
-export const getTodaysMonthAndYear = () => {
-  const today = new Date()
-  const options: Intl.DateTimeFormatOptions = { month: 'long', year: 'numeric' }
+interface TodayDatePropsType {
+  todayDate: Date
+}
+
+export const getTodaysMonthAndYear = ({ todayDate }: TodayDatePropsType) => {
+  const today = todayDate
+  const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' }
   return new Intl.DateTimeFormat('en-US', options).format(today)
 }

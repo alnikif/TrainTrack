@@ -1,28 +1,15 @@
 import React from 'react'
 
 import Layout from '../components/Layout/Layout'
+import { DateProvider } from '../providers/DateProvider'
 
 import '../globals.css'
 
 const HomePage: React.FC = () => {
-  const options = {
-    chart: {
-      type: 'bar',
-    },
-    title: {
-      text: 'My Highcharts Bar Chart',
-    },
-    series: [
-      {
-        data: [1, 2, 3, 4, 5],
-      },
-    ],
-  }
   return (
-    <div>
+    <DateProvider>
       <Layout />
-      {/*<HighchartsReact highcharts={Highcharts} options={options} />*/}
-    </div>
+    </DateProvider>
   )
 }
 
