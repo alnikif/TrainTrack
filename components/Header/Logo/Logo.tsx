@@ -1,12 +1,12 @@
 import React from 'react'
 
-import styles from './Logo.module.scss'
+import HeartIcon from '../../../icons/HeartIcon'
 
 const Logo = () => {
   return (
-    <div className={styles.logoWrapper}>
-      <i className="heartbeat icon"></i>
-      <h3 className={styles.nameLogo}>TrainTrack</h3>
+    <div className="flex items-center px-5">
+      <HeartIcon />
+      <h3 className="px-1">TrainTrack</h3>
     </div>
   )
 }

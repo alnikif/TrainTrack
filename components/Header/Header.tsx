@@ -8,7 +8,7 @@ import Logo from './Logo/Logo'
 
 const Header = () => {
   return (
-    <div>
+    <div className="flex">
       <IconButton type="burger" />
       <Logo />
       <Button title="Today" />
