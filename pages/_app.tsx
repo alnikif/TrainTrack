@@ -1,16 +1,19 @@
+import { AppProps } from 'next/app'
 import React from 'react'
 
+import Providers from '../Providers'
 import Layout from '../components/Layout/Layout'
-import { DateProvider } from '../providers/DateProvider'
 
 import '../globals.css'
 
-const HomePage: React.FC = () => {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <DateProvider>
-      <Layout />
-    </DateProvider>
+    <Providers>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Providers>
   )
 }
 
-export default HomePage
+export default MyApp

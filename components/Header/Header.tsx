@@ -12,7 +12,7 @@ interface HeaderPropsType {
 
 const Header: FC<HeaderPropsType> = ({ onClickToggle }) => {
   return (
-    <div className="flex  border-b border-gray-300 p-2">
+    <div className="flex border-b border-gray-300 p-2 w-full">
       <IconButton type="burger" onClick={onClickToggle} />
       <Logo />
       <Button title="Today" />
