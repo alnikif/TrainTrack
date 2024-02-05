@@ -1,29 +1,19 @@
+import { AppProps } from 'next/app'
 import React from 'react'
 
+import Providers from '../Providers'
 import Layout from '../components/Layout/Layout'
 
 import '../globals.css'
 
-const HomePage: React.FC = () => {
-  const options = {
-    chart: {
-      type: 'bar',
-    },
-    title: {
-      text: 'My Highcharts Bar Chart',
-    },
-    series: [
-      {
-        data: [1, 2, 3, 4, 5],
-      },
-    ],
-  }
+const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
-    <div>
-      <Layout />
-      {/*<HighchartsReact highcharts={Highcharts} options={options} />*/}
-    </div>
+    <Providers>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Providers>
   )
 }
 
-export default HomePage
+export default MyApp
