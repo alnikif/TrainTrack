@@ -20,7 +20,7 @@ interface DateProviderProps {
 
 export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
   const [todayDate, setTodayDate] = useState(new Date())
-
+  console.log(todayDate, 'provider')
   const setDate = (newDate: Date) => {
     setTodayDate(newDate)
   }

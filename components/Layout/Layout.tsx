@@ -13,9 +13,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
     isOpen ? 'translate-x-0' : '-translate-x-full'
   }`
 
-  const filterData = useContext(FilterDataContext)
-  console.log(filterData)
-
   return (
     <div className="flex">
       <Header onClickToggle={handleToggle} />
