@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@tsconfig/next": "^2.0.1",
+    "@types/highcharts": "^7.0.0",
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.51",
     "@types/react-dom": "^18",
