@@ -1,7 +1,7 @@
-import React, { ReactNode, useContext, useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
-import { FilterDataContext } from '../../providers/FilterDataProvider'
 import Calendar from '../Calendar/Calendar'
+import HeartRateChart from '../Charts/HeartRateChart'
 import Header from '../Header/Header'
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -14,14 +14,16 @@ const Layout = ({ children }: { children: ReactNode }) => {
   }`
 
   return (
-    <div className="flex">
+    <div className="flex flex-col">
       <Header onClickToggle={handleToggle} />
-      <div>
+      <div className="flex flex-row justify-center">
+        <HeartRateChart />
         <div className={containerClassName}>
           <Calendar />
         </div>
-        <div>{children}</div>
       </div>
+
+      <div>{children}</div>
     </div>
   )
 }
