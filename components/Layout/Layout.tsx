@@ -12,11 +12,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const containerClassName = `fixed top-16 left-0 transform transition-transform ${
     isOpen ? 'translate-x-0' : '-translate-x-full'
   }`
-  const [chartWidth, setChartWidth] = useState('full')
 
-  useEffect(() => {
-    setChartWidth(isOpen ? '4/6' : 'full')
-  }, [isOpen])
   return (
     <div className="flex flex-col">
       <Header onClickToggle={handleToggle} />
@@ -26,7 +22,9 @@ const Layout = ({ children }: { children: ReactNode }) => {
             <Calendar />
           </div>
         </div>
-        <div className={`chart-container w-${chartWidth} h-400px transition-width duration-500 ease-in-out`}>
+        <div
+          className={`chart-container ${isOpen ? 'w-4/6' : 'w-full'} h-400px transition-width duration-500 ease-in-out`}
+        >
           <HeartRateChart />
         </div>
       </div>
