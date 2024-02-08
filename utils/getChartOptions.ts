@@ -13,7 +13,7 @@ const GetChartOptions = () => {
     })
   const options = {
     chart: {
-      type: 'area',
+      type: 'line',
     },
     title: {
       text: 'Heart Rate Chart',
