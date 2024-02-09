@@ -1,7 +1,8 @@
 import React, { FC, ReactNode } from 'react'
 
 import { DateProvider } from './providers/DateProvider'
-import { FilterDataProvider } from './providers/FilterDataProvider'
+import { HeartRateDataProvider } from './providers/HeartRateDataProvider'
+import StepsCounterDataProvider from './providers/StepsCounterDataProvider'
 
 interface ProvidersType {
   readonly children: ReactNode
@@ -12,7 +13,9 @@ const Providers: FC<ProvidersType> = (props) => {
 
   return (
     <DateProvider>
-      <FilterDataProvider>{children}</FilterDataProvider>
+      <HeartRateDataProvider>
+        <StepsCounterDataProvider>{children}</StepsCounterDataProvider>
+      </HeartRateDataProvider>
     </DateProvider>
   )
 }
