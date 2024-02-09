@@ -1,10 +1,6 @@
-import * as Highcharts from 'highcharts'
-import { useContext } from 'react'
+import { ChartDataItem } from '../types/chartData'
 
-import { FilterDataContext } from '../providers/FilterDataProvider'
-
-const GetChartOptions = () => {
-  const filteredData = useContext(FilterDataContext)
+const GetChartOptions = (filteredData: ChartDataItem[], title: string) => {
   const xAxisData = filteredData
     .filter((item) => typeof item[0] === 'string')
     .map((item) => {
@@ -16,7 +12,7 @@ const GetChartOptions = () => {
       type: 'line',
     },
     title: {
-      text: 'Heart Rate Chart',
+      text: title,
     },
     xAxis: {
       type: 'datetime',

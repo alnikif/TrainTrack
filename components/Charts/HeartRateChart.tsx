@@ -1,11 +1,14 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import React from 'react'
+import React, { useContext } from 'react'
 
+import { FilterDataContext } from '../../providers/HeartRateDataProvider'
 import GetChartOptions from '../../utils/getChartOptions'
 
 const HeartRateChart = () => {
-  const { options } = GetChartOptions()
+  const filteredData = useContext(FilterDataContext)
+
+  const { options } = GetChartOptions(filteredData, 'Heart Rate Chart')
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 

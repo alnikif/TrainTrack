@@ -1,5 +1,6 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode, useContext, useState } from 'react'
 
+import { StepsCounterContext } from '../../providers/StepsCounterDataProvider'
 import Calendar from '../Calendar/Calendar'
 import Header from '../Header/Header'
 
@@ -7,6 +8,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen((prevIsOpen) => !prevIsOpen)
 
+  const counterSteps = useContext(StepsCounterContext)
+  console.log(counterSteps)
   return (
     <>
       <Header onClickToggle={handleToggle} />

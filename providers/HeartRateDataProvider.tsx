@@ -13,7 +13,7 @@ interface FilterDataProviderProps {
 
 export const FilterDataContext = createContext<ChartDataItem[]>([])
 
-export const FilterDataProvider: React.FC<FilterDataProviderProps> = ({ children }) => {
+export const HeartRateDataProvider: React.FC<FilterDataProviderProps> = ({ children }) => {
   const { todayDate } = useContext(DateContext)
 
   const currentDate = getTodayDate({ todayDate })
