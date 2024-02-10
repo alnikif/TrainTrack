@@ -8,8 +8,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleToggle = () => setIsOpen((prevIsOpen) => !prevIsOpen)
 
-  const counterSteps = useContext(StepsCounterContext)
-  console.log(counterSteps)
   return (
     <>
       <Header onClickToggle={handleToggle} />
