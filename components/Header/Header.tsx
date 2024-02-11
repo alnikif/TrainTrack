@@ -5,6 +5,7 @@ import IconButton from '../Buttons/IconButton/IconButton'
 
 import HeaderDate from './HeaderDate/HeaderDate'
 import Logo from './Logo/Logo'
+import NavItems from './NavItems/NavItems'
 
 interface HeaderPropsType {
   onClickToggle: React.MouseEventHandler<HTMLButtonElement>
@@ -12,13 +13,18 @@ interface HeaderPropsType {
 
 const Header: FC<HeaderPropsType> = ({ onClickToggle }) => {
   return (
-    <div className="flex border-b border-gray-300 p-2 w-full">
-      <IconButton type="burger" onClick={onClickToggle} />
-      <Logo />
-      <Button title="Today" />
-      <IconButton type="backArrow" />
-      <IconButton type="forwardArrow" />
-      <HeaderDate />
+    <div className="flex flex-row justify-between border-b border-gray-300 p-2 w-full">
+      <div className="flex">
+        <IconButton type="burger" onClick={onClickToggle} />
+        <Logo />
+        <Button title="Today" />
+        <IconButton type="backArrow" />
+        <IconButton type="forwardArrow" />
+        <HeaderDate />
+      </div>
+      <div>
+        <NavItems />
+      </div>
     </div>
   )
 }
