@@ -6,8 +6,8 @@ import { StepsCounterContext } from '../../providers/StepsCounterDataProvider'
 import GetChartOptions from '../../utils/getChartOptions'
 
 const StepsCounterChart = () => {
-  const stepsCounter = useContext(StepsCounterContext)
-  const { options } = GetChartOptions(stepsCounter, 'line', 'Steps Counter Chart')
+  const stepsData = useContext(StepsCounterContext)
+  const { options } = GetChartOptions(stepsData, 'line', 'Steps Counter Chart')
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 

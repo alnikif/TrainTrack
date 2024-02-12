@@ -1,23 +1,30 @@
 import { ChartDataItem } from '../types/chartData'
 
-const generateCumulativeStepsData = (startTimeString: string, endTimeString: string) => {
+const generateCumulativeStepsData = (startDateString: string, endDateString: string) => {
   const data: ChartDataItem[] = []
-  const startTime = new Date(startTimeString)
-  const endTime = new Date(endTimeString)
-  const currentDate = new Date(startTime)
+  const currentDate = new Date()
+  const startTime = new Date(startDateString)
+  const endDate = new Date(endDateString)
 
-  while (currentDate <= endTime) {
-    const timestamp = currentDate.toISOString()
+  const targetDate = new Date(startTime)
+
+  while (targetDate <= endDate) {
     let total = 0
-    for (let i = 0; i < 24; i++) {
+
+    for (let i = 0; i < 24 || targetDate <= currentDate; i++) {
+      const timestamp = targetDate.toISOString()
       const stepsForHour = Math.floor(Math.random() * 5001)
       total += stepsForHour
       const chartDataItem: ChartDataItem = [timestamp, total]
+      targetDate.setMinutes(targetDate.getMinutes() + 60)
       data.push(chartDataItem)
     }
+
     total = 0
-    currentDate.setDate(currentDate.getDate() + 1)
+    targetDate.setDate(targetDate.getDate() + 1)
   }
+
   return data
 }
+
 export default generateCumulativeStepsData

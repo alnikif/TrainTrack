@@ -1,12 +1,9 @@
 import { ChartDataItem } from '../types/chartData'
 
-const GetChartOptions = (filteredData: ChartDataItem[], type: string, title: string) => {
-  const xAxisData = filteredData
-    .filter((item) => typeof item[0] === 'string')
-    .map((item) => {
-      const date = new Date(item[0])
-      return `${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`
-    })
+import getDateFormattedTime from './getDateFormattedTime'
+
+function GetChartOptions(data: ChartDataItem[], type: string, title: string) {
+  const xAxisData = data.map((item) => getDateFormattedTime(item[0]))
 
   const options = {
     chart: {
@@ -30,7 +27,7 @@ const GetChartOptions = (filteredData: ChartDataItem[], type: string, title: str
     series: [
       {
         name: 'Heart Rate',
-        data: filteredData.map((item) => item[1]),
+        data: data.map((item) => item[1]),
       },
     ],
   }
