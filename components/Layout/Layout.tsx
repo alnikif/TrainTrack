@@ -1,5 +1,6 @@
 import React, { ReactNode, useContext, useState } from 'react'
 
+import { DateContext } from '../../providers/DateProvider'
 import { StepsCounterContext } from '../../providers/StepsCounterDataProvider'
 import Calendar from '../Calendar/Calendar'
 import Header from '../Header/Header'

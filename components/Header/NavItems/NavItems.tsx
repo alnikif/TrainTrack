@@ -1,18 +1,14 @@
-import Link from 'next/link'
 import React from 'react'
 
-enum NavItemsPaths {
-  heartRateChart = '/heart-rate-chart',
-  stepsCounterChart = '/steps-counter-chart',
-  caloriesChart = '/calories-chart',
-}
+import { navItemsConfig } from '../../../constants/navItemsConfig'
+import NavItem from '../NavItem/NavItem'
 
 export const NavItems = () => {
   return (
     <div className="flex justify-center gap-2">
-      <Link href={NavItemsPaths.heartRateChart}>Heart Rate</Link>
-      <Link href={NavItemsPaths.stepsCounterChart}>Steps Counter</Link>
-      <Link href={NavItemsPaths.caloriesChart}>Calories</Link>
+      {navItemsConfig.map((el) => {
+        return <NavItem href={el.url} title={el.label} key={el.url} />
+      })}
     </div>
   )
 }

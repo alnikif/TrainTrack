@@ -1,6 +1,6 @@
 export const getEndDate = ({ todayDate }: { todayDate: Date }) => {
   const endDate = new Date(todayDate.getTime())
-  endDate.setDate(endDate.getDate() + 1)
+  endDate.setDate(endDate.getDate())
   const year = endDate.getFullYear()
   const month = (endDate.getMonth() + 1).toString().padStart(2, '0')
   const day = endDate.getDate().toString().padStart(2, '0')

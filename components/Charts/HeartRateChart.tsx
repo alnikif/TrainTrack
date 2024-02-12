@@ -9,6 +9,7 @@ const HeartRateChart = () => {
   const filteredData = useContext(FilterDataContext)
 
   const { options } = GetChartOptions(filteredData, 'line', 'Heart Rate Chart')
+  console.log(options)
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 
