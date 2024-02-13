@@ -7,10 +7,9 @@ const generateCumulativeStepsData = (startDateString: string, endDateString: str
   const endDate = new Date(endDateString)
 
   const targetDate = new Date(startTime)
+  let total = 0
 
   while (targetDate <= endDate) {
-    let total = 0
-
     for (let i = 0; i < 24 || targetDate <= currentDate; i++) {
       const timestamp = targetDate.toISOString()
       const stepsForHour = Math.floor(Math.random() * 5001)

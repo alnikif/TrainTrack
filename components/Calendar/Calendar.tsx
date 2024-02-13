@@ -12,7 +12,7 @@ const Calendar = () => {
     setDate(selectedDate)
   }
 
-  const yesterday = subDays(todayDate, 1)
+  const yesterday = subDays(new Date(), 1)
 
   return (
     <DatePicker selected={todayDate} onChange={handleDateChange} maxDate={yesterday} dateFormat="yyyy-MM-dd" inline />
