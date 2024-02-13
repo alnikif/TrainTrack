@@ -1,3 +1,4 @@
+import { subDays } from 'date-fns'
 import React, { FC, useContext } from 'react'
 
 import LeftArrowIcon from '../../../icons/LeftArrowIcon'
@@ -9,6 +10,8 @@ interface IconButtonPropsType {
   type: string
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
+
+const yesterday = subDays(new Date(), 1)
 
 const IconButton: FC<IconButtonPropsType> = ({ type, onClick }) => {
   const { todayDate, setDate } = useContext(DateContext)
@@ -42,7 +45,11 @@ const IconButton: FC<IconButtonPropsType> = ({ type, onClick }) => {
     }
     case 'forwardArrow': {
       return (
-        <button onClick={handleNextDay} className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none">
+        <button
+          disabled={todayDate >= yesterday}
+          onClick={handleNextDay}
+          className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none"
+        >
           <RightArrowIcon />
         </button>
       )

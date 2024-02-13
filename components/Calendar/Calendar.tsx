@@ -1,8 +1,8 @@
-import en from 'date-fns/locale/en-GB'
+import { subDays } from 'date-fns'
 import React, { useContext } from 'react'
 import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 
+import 'react-datepicker/dist/react-datepicker.css'
 import { DateContext } from '../../providers/DateProvider'
 
 const Calendar = () => {
@@ -12,7 +12,11 @@ const Calendar = () => {
     setDate(selectedDate)
   }
 
-  return <DatePicker selected={todayDate} onChange={handleDateChange} locale={en} dateFormat="yyyy-MM-dd" inline />
+  const yesterday = subDays(todayDate, 1)
+
+  return (
+    <DatePicker selected={todayDate} onChange={handleDateChange} maxDate={yesterday} dateFormat="yyyy-MM-dd" inline />
+  )
 }
 
 export default Calendar
