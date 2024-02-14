@@ -1,63 +1,26 @@
-import { subDays } from 'date-fns'
-import React, { FC, useContext } from 'react'
-
-import LeftArrowIcon from '../../../icons/LeftArrowIcon'
-import RightArrowIcon from '../../../icons/RightArrowIcon'
-import BurgerMenuIcon from '../../../icons/burgerMenu'
-import { DateContext } from '../../../providers/DateProvider'
+import React, { FC, ReactNode } from 'react'
 
 interface IconButtonPropsType {
-  type: string
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  disabled?: boolean
+  className?: string
+  children?: ReactNode
+  onClick: () => void
 }
 
-const yesterday = subDays(new Date(), 1)
+const IconButton: FC<IconButtonPropsType> = (props) => {
+  const { disabled, className, children, onClick } = props
 
-const IconButton: FC<IconButtonPropsType> = ({ type, onClick }) => {
-  const { todayDate, setDate } = useContext(DateContext)
-
-  const handleNextDay = () => {
-    const nextDay = new Date(todayDate)
-    nextDay.setDate(nextDay.getDate() + 1)
-    setDate(nextDay)
+  const onButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onClick()
   }
 
-  const handlePrevDay = () => {
-    const prevDay = new Date(todayDate)
-    prevDay.setDate(prevDay.getDate() - 1)
-    setDate(prevDay)
-  }
-
-  switch (type) {
-    case 'burger': {
-      return (
-        <button onClick={onClick}>
-          <BurgerMenuIcon />
-        </button>
-      )
-    }
-    case 'backArrow': {
-      return (
-        <button onClick={handlePrevDay} className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none">
-          <LeftArrowIcon />
-        </button>
-      )
-    }
-    case 'forwardArrow': {
-      return (
-        <button
-          disabled={todayDate >= yesterday}
-          onClick={handleNextDay}
-          className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none"
-        >
-          <RightArrowIcon />
-        </button>
-      )
-    }
-    default: {
-      return null
-    }
-  }
+  return (
+    <button className={className} disabled={disabled} onClick={onButtonClick}>
+      {children}
+    </button>
+  )
 }
 
 export default IconButton

@@ -6,10 +6,9 @@ interface ButtonPropsType {
   title: string
 }
 const Button: FC<ButtonPropsType> = ({ title }) => {
-  const { todayDate, setDate } = useContext(DateContext)
-  const handleTodayDate = () => {
-    setDate(new Date())
-  }
+  const { setSelectedDate } = useContext(DateContext)
+  const handleTodayDate = () => setSelectedDate(new Date())
+
   return (
     <button
       onClick={title == 'Today' ? handleTodayDate : undefined}

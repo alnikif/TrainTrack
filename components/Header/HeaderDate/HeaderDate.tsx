@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 
 import { DateContext } from '../../../providers/DateProvider'
-import { getTodaysMonthAndYear } from '../../../utils/dateUtils'
+import getFormattedDate from '../../../utils/getFormattedDate'
 
 const HeaderDate = () => {
-  const { todayDate, setDate } = useContext(DateContext)
-  const date = getTodaysMonthAndYear({ todayDate })
-  return <div className="flex items-center">{date}</div>
+  const { selectedDate } = useContext(DateContext)
+  return <div className="flex items-center">{getFormattedDate(selectedDate)}</div>
 }
 
 export default HeaderDate

@@ -1,13 +1,13 @@
 import React, { createContext, useState, ReactNode } from 'react'
 
 interface DateContextType {
-  todayDate: Date
-  setDate: (newDate: Date) => void
+  selectedDate: Date
+  setSelectedDate: (newDate: Date) => void
 }
 
 const defaultDateContext = {
-  todayDate: new Date(),
-  setDate: () => {
+  selectedDate: new Date(),
+  setSelectedDate: () => {
     //
   },
 }
@@ -19,14 +19,11 @@ interface DateProviderProps {
 }
 
 export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
-  const [todayDate, setTodayDate] = useState(new Date())
-  const setDate = (newDate: Date) => {
-    setTodayDate(newDate)
-  }
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   const contextValue: DateContextType = {
-    todayDate,
-    setDate,
+    selectedDate,
+    setSelectedDate,
   }
 
   return <DateContext.Provider value={contextValue}>{children}</DateContext.Provider>

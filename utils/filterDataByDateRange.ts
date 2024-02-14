@@ -1,7 +1,7 @@
 import { ChartDataItem } from '../types/chartData'
 
 const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endDate: Date) => {
-  const dateFormatter = new Intl.DateTimeFormat('pl-PL', {
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',

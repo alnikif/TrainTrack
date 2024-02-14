@@ -1,12 +1,11 @@
 import { ChartDataItem } from '../types/chartData'
 
-const generateCumulativeStepsData = (startDateString: string, endDateString: string) => {
+const generateCumulativeStepsData = (startDateString: Date | string, endDateString: Date | string) => {
   const data: ChartDataItem[] = []
   const currentDate = new Date()
-  const startTime = new Date(startDateString)
   const endDate = new Date(endDateString)
 
-  const targetDate = new Date(startTime)
+  const targetDate = new Date(startDateString)
   let total = 0
 
   while (targetDate <= endDate) {

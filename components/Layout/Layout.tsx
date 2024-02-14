@@ -7,11 +7,11 @@ import Header from '../Header/Header'
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const handleToggle = () => setIsOpen((prevIsOpen) => !prevIsOpen)
+  const onToggleMenu = () => setIsOpen((prevIsOpen) => !prevIsOpen)
 
   return (
     <>
-      <Header onClickToggle={handleToggle} />
+      <Header onToggleMenu={onToggleMenu} />
       <div className="flex flex-row justify-items-start w-full h-full">
         <div
           className={`transform transition-transform overflow-hidden duration-500 ease-in-out ${isOpen ? 'translate-x-0 w-1/4' : '-translate-x-full w-0'}`}

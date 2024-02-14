@@ -1,21 +1,20 @@
-import { subDays } from 'date-fns'
 import React, { useContext } from 'react'
 import DatePicker from 'react-datepicker'
 
-import 'react-datepicker/dist/react-datepicker.css'
 import { DateContext } from '../../providers/DateProvider'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const Calendar = () => {
-  const { todayDate, setDate } = useContext(DateContext)
-
-  const handleDateChange = (selectedDate: Date) => {
-    setDate(selectedDate)
-  }
-
-  const yesterday = subDays(new Date(), 1)
+  const { selectedDate, setSelectedDate } = useContext(DateContext)
 
   return (
-    <DatePicker selected={todayDate} onChange={handleDateChange} maxDate={yesterday} dateFormat="yyyy-MM-dd" inline />
+    <DatePicker
+      inline
+      dateFormat="yyyy-MM-dd"
+      selected={selectedDate}
+      maxDate={new Date()}
+      onChange={setSelectedDate}
+    />
   )
 }
 

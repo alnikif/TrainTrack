@@ -1,19 +1,23 @@
 import { ChartDataItem } from '../types/chartData'
 
-const generateHeartRateData = (startTimeString: string, endTimeString: string, minValue: number, maxValue: number) => {
+const generateHeartRateData = (
+  startTimeString: Date | string,
+  endTimeString: Date | string,
+  minValue: number,
+  maxValue: number,
+) => {
   const data: ChartDataItem[] = []
-  const startTime = new Date(startTimeString)
   const endTime = new Date(endTimeString)
-  const currentDate = new Date(startTime)
+  const targetDate = new Date(startTimeString)
 
-  while (currentDate <= endTime) {
-    const timestamp = currentDate.toISOString()
+  while (targetDate <= endTime) {
+    const timestamp = targetDate.toISOString()
     const value = Math.random() * (maxValue - minValue) + minValue
-
     const chartDataItem: ChartDataItem = [timestamp, Number(value.toFixed(2))]
+
     data.push(chartDataItem)
 
-    currentDate.setMinutes(currentDate.getMinutes() + 60)
+    targetDate.setMinutes(targetDate.getMinutes() + 60)
   }
 
   return data
