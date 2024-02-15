@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 
+import CaloriesDataProvider, { CaloriesDataContext } from './providers/CaloriesDataProvider'
 import { DateProvider } from './providers/DateProvider'
 import { HeartRateDataProvider } from './providers/HeartRateDataProvider'
 import StepsCounterDataProvider from './providers/StepsCounterDataProvider'
@@ -14,7 +15,9 @@ const Providers: FC<ProvidersType> = (props) => {
   return (
     <DateProvider>
       <HeartRateDataProvider>
-        <StepsCounterDataProvider>{children}</StepsCounterDataProvider>
+        <StepsCounterDataProvider>
+          <CaloriesDataProvider>{children}</CaloriesDataProvider>
+        </StepsCounterDataProvider>
       </HeartRateDataProvider>
     </DateProvider>
   )

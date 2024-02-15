@@ -1,7 +1,7 @@
 export enum NavItemsPaths {
   heartRateChart = '/heart-rate-chart',
   stepsCounterChart = '/steps-counter-chart',
-  caloriesChart = '/calories-chart',
+  caloriesChart = '/calories-counter-chart',
 }
 export const navItemsConfig = [
   { label: 'Heart Rate', url: NavItemsPaths.heartRateChart },

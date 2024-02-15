@@ -1,6 +1,8 @@
+import React from 'react'
+
 import { ChartDataItem } from '../types/chartData'
 
-const generateCumulativeStepsData = (startDateString: Date | string, endDateString: Date | string) => {
+const GenerateCaloriesData = (startDateString: Date | string, endDateString: Date | string) => {
   const data: ChartDataItem[] = []
   const currentDate = new Date()
   const endDate = new Date(endDateString)
@@ -12,8 +14,8 @@ const generateCumulativeStepsData = (startDateString: Date | string, endDateStri
 
     for (let i = 0; i < 24 || targetDate <= currentDate; i++) {
       const timestamp = targetDate.toISOString()
-      const stepsForHour = Math.floor(Math.random() * 5001)
-      total += stepsForHour
+      const caloriesForHour = Math.floor(Math.random() * 5001)
+      total += caloriesForHour
       const chartDataItem: ChartDataItem = [timestamp, total]
       targetDate.setMinutes(targetDate.getMinutes() + 60)
       data.push(chartDataItem)
@@ -25,4 +27,4 @@ const generateCumulativeStepsData = (startDateString: Date | string, endDateStri
   return data
 }
 
-export default generateCumulativeStepsData
+export default GenerateCaloriesData
