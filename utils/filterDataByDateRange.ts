@@ -15,7 +15,7 @@ const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endD
     const formattedEntryDateString = dateFormatter.format(new Date(item[0]))
     const formattedEntryDate = new Date(formattedEntryDateString)
 
-    return formattedEntryDate >= formattedStartDate && formattedEntryDate <= formattedEndDate
+    return formattedEntryDate >= formattedStartDate && formattedEntryDate < formattedEndDate
   })
 }
 

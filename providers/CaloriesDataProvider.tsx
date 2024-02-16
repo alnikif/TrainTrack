@@ -1,6 +1,6 @@
 import React, { createContext, FC, ReactNode, useContext } from 'react'
 
-import { caloriesData, stepsCounterData } from '../constants/mocked-data'
+import { caloriesData } from '../constants/mocked-data'
 import { ChartDataItem } from '../types/chartData'
 import filterDataByDateRange from '../utils/filterDataByDateRange'
 import { getNextDay } from '../utils/getNextDay'
