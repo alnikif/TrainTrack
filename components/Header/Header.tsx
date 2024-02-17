@@ -9,6 +9,8 @@ import { getNextDay } from '../../utils/getNextDay'
 import { getPrevDay } from '../../utils/getPrevDay'
 import Button from '../Buttons/Button/Button'
 import IconButton from '../Buttons/IconButton/IconButton'
+import ChartTypesDropdown from '../Dropdown/ChartTypesDropdown/ChartTypesDropdown'
+import Dropdown from '../Dropdown/DropdownComponent/Dropdown'
 
 import HeaderDate from './HeaderDate/HeaderDate'
 import Logo from './Logo/Logo'
@@ -54,6 +56,7 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
           <RightArrowIcon />
         </IconButton>
         <HeaderDate />
+        <ChartTypesDropdown />
       </div>
       <div>
         <NavItems />

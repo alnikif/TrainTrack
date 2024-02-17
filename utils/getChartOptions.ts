@@ -2,12 +2,12 @@ import { ChartDataItem } from '../types/chartData'
 
 import getDateFormattedTime from './getDateFormattedTime'
 
-function GetChartOptions(data: ChartDataItem[], type: string, title: string) {
+function GetChartOptions(data: ChartDataItem[], chartType: string, title: string, yTitle: string) {
   const xAxisData = data.map((item) => getDateFormattedTime(item[0]))
 
   const options = {
     chart: {
-      type: type,
+      type: chartType,
     },
     title: {
       text: title,
@@ -21,12 +21,12 @@ function GetChartOptions(data: ChartDataItem[], type: string, title: string) {
     },
     yAxis: {
       title: {
-        text: 'Heart Rate',
+        text: yTitle,
       },
     },
     series: [
       {
-        name: 'Heart Rate',
+        name: yTitle,
         data: data.map((item) => item[1]),
       },
     ],

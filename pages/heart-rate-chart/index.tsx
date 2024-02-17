@@ -8,7 +8,7 @@ import GetChartOptions from '../../utils/getChartOptions'
 const HeartRateChart = () => {
   const filteredData = useContext(FilterDataContext)
 
-  const { options } = GetChartOptions(filteredData, 'line', 'Heart Rate Chart')
+  const { options } = GetChartOptions(filteredData, 'line', 'Heart Rate Chart', 'Heart Rate')
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 
