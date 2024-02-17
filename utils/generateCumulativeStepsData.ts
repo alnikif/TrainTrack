@@ -11,7 +11,7 @@ const generateCumulativeStepsData = (startDateString: Date | string, endDateStri
     if (d.getHours() === 1) total = 0
     const timestamp = d.toISOString()
     const stepsForHour = Math.floor(Math.random() * 701)
-    total += stepsForHour
+    total += d.getHours() > 0 && d.getHours() < 7 ? 0 : stepsForHour
     data.push([timestamp, total])
   }
 

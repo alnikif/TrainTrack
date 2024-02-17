@@ -8,12 +8,11 @@ const generateCumulativeStepsData = (startDateString: Date | string, endDateStri
   let total = 0
 
   for (let d = startDate; d <= endDate; d.setHours(d.getHours() + 1)) {
-    if (d.getHours() < 1) total = 0
+    if (d.getHours() === 1) total = 0
 
     const timestamp = d.toISOString()
     const caloriesForHour = Math.floor(Math.random() * 201)
-    // total += d.getHours() < 7 ? 0 : caloriesForHour
-    total += caloriesForHour
+    total += d.getHours() > 0 && d.getHours() < 7 ? 0 : caloriesForHour
     data.push([timestamp, total])
   }
 
