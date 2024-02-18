@@ -27,7 +27,9 @@ function GetChartOptions(data: ChartDataItem[], chartType: string, title: string
     series: [
       {
         name: yTitle,
-        data: data.map((item) => item[1]),
+        data: data.map((item) => {
+          return item[1]
+        }),
       },
     ],
   }

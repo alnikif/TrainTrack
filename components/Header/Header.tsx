@@ -56,7 +56,6 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
           <RightArrowIcon />
         </IconButton>
         <HeaderDate />
-        <ChartTypesDropdown />
       </div>
       <div>
         <NavItems />
