@@ -5,7 +5,8 @@ import getFormattedDate from '../../../utils/getFormattedDate'
 
 const HeaderDate = () => {
   const { selectedDate } = useContext(DateContext)
-  return <div className="flex items-center">{getFormattedDate(selectedDate)}</div>
+  const { startDate, endDate } = selectedDate
+  return <div className="flex items-center">{getFormattedDate(endDate)}</div>
 }
 
 export default HeaderDate

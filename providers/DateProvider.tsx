@@ -1,12 +1,12 @@
-import React, { createContext, useState, ReactNode } from 'react'
+import React, { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react'
 
 interface DateContextType {
-  selectedDate: Date
-  setSelectedDate: (newDate: Date) => void
+  selectedDate: { endDate: Date; startDate: Date }
+  setSelectedDate: Dispatch<SetStateAction<{ startDate: Date; endDate: Date }>>
 }
 
-const defaultDateContext = {
-  selectedDate: new Date(),
+const defaultDateContext: DateContextType = {
+  selectedDate: { startDate: new Date('2024-01-01'), endDate: new Date() },
   setSelectedDate: () => {
     //
   },
@@ -19,7 +19,7 @@ interface DateProviderProps {
 }
 
 export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState({ startDate: new Date('2024-01-01'), endDate: new Date() })
 
   const contextValue: DateContextType = {
     selectedDate,

@@ -9,8 +9,6 @@ import { getNextDay } from '../../utils/getNextDay'
 import { getPrevDay } from '../../utils/getPrevDay'
 import Button from '../Buttons/Button/Button'
 import IconButton from '../Buttons/IconButton/IconButton'
-import ChartTypesDropdown from '../Dropdown/ChartTypesDropdown/ChartTypesDropdown'
-import Dropdown from '../Dropdown/DropdownComponent/Dropdown'
 
 import HeaderDate from './HeaderDate/HeaderDate'
 import Logo from './Logo/Logo'
@@ -22,19 +20,20 @@ interface HeaderPropsType {
 
 const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
   const { selectedDate, setSelectedDate } = useContext(DateContext)
+  const { startDate, endDate } = selectedDate
 
   const currentDate = new Date()
-  const nextDate = getNextDay(selectedDate)
+  const nextDate = getNextDay(endDate)
   const isNextDayAvailable = new Date(getFormattedDate(nextDate)) <= new Date(getFormattedDate(currentDate))
 
   const onSelectPrevDay = () => {
-    const prevDate = getPrevDay(selectedDate)
-    setSelectedDate(prevDate)
+    const prevDate = getPrevDay(endDate)
+    setSelectedDate({ startDate: startDate, endDate: prevDate })
   }
 
   const onSelectNextDay = () => {
     if (!isNextDayAvailable) return
-    setSelectedDate(nextDate)
+    setSelectedDate({ startDate: startDate, endDate: nextDate })
   }
 
   return (

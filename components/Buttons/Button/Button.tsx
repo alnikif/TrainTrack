@@ -6,8 +6,9 @@ interface ButtonPropsType {
   title: string
 }
 const Button: FC<ButtonPropsType> = ({ title }) => {
-  const { setSelectedDate } = useContext(DateContext)
-  const handleTodayDate = () => setSelectedDate(new Date())
+  const { selectedDate, setSelectedDate } = useContext(DateContext)
+  const { startDate, endDate } = selectedDate
+  const handleTodayDate = () => setSelectedDate({ startDate: startDate, endDate: new Date() })
 
   return (
     <button

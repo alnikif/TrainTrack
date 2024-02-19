@@ -15,8 +15,9 @@ export const FilterDataContext = createContext<ChartDataItem[]>([])
 
 export const HeartRateDataProvider: React.FC<FilterDataProviderProps> = ({ children }) => {
   const { selectedDate } = useContext(DateContext)
+  const { startDate, endDate } = selectedDate
 
-  const defaultDataContext = filterDataByDateRange(heartRateData, selectedDate, getNextDay(selectedDate))
+  const defaultDataContext = filterDataByDateRange(heartRateData, endDate, getNextDay(endDate))
 
   return <FilterDataContext.Provider value={defaultDataContext}>{children}</FilterDataContext.Provider>
 }

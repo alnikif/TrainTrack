@@ -15,8 +15,9 @@ export const StepsCounterContext = createContext<ChartDataItem[]>([])
 
 const StepsCounterDataProvider: FC<StepsCounterDataProviderProps> = ({ children }) => {
   const { selectedDate } = useContext(DateContext)
+  const { startDate, endDate } = selectedDate
 
-  const defaultDataContext = filterDataByDateRange(stepsCounterData, selectedDate, getNextDay(selectedDate))
+  const defaultDataContext = filterDataByDateRange(stepsCounterData, endDate, getNextDay(endDate))
 
   return <StepsCounterContext.Provider value={defaultDataContext}>{children}</StepsCounterContext.Provider>
 }

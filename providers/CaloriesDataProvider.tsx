@@ -15,8 +15,9 @@ export const CaloriesDataContext = createContext<ChartDataItem[]>([])
 
 const CaloriesDataProvider: FC<CaloriesDataProviderProps> = ({ children }) => {
   const { selectedDate } = useContext(DateContext)
+  const { startDate, endDate } = selectedDate
 
-  const defaultDataContext = filterDataByDateRange(caloriesData, selectedDate, getNextDay(selectedDate))
+  const defaultDataContext = filterDataByDateRange(caloriesData, endDate, getNextDay(endDate))
 
   return <CaloriesDataContext.Provider value={defaultDataContext}>{children}</CaloriesDataContext.Provider>
 }
