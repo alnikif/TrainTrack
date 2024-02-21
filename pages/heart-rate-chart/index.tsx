@@ -6,7 +6,7 @@ import { FilterDataContext } from '../../providers/HeartRateDataProvider'
 const HeartRateChart = () => {
   const filteredData = useContext(FilterDataContext)
 
-  return <Chart data={filteredData} />
+  return <Chart data={filteredData} title="Heart Rate" />
 }
 
 export default HeartRateChart

@@ -6,7 +6,7 @@ import { StepsCounterContext } from '../../providers/StepsCounterDataProvider'
 const StepsCounterChart = () => {
   const stepsData = useContext(StepsCounterContext)
 
-  return <Chart data={stepsData} />
+  return <Chart data={stepsData} title="Steps Counter" />
 }
 
 export default StepsCounterChart

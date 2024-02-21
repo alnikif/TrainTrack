@@ -19,7 +19,7 @@ interface DateProviderProps {
 }
 
 export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState({ startDate: new Date('2024-02-02'), endDate: new Date() })
+  const [selectedDate, setSelectedDate] = useState({ startDate: new Date(), endDate: new Date() })
 
   const contextValue: DateContextType = {
     selectedDate,

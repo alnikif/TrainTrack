@@ -11,7 +11,10 @@ const Calendar = () => {
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      setInitialDate(date)
+      setSelectedDate((prevState) => ({
+        ...prevState,
+        endDate: date,
+      }))
     }
   }
 
@@ -29,7 +32,7 @@ const Calendar = () => {
       startDate={startDate}
       endDate={endDate}
       selectsRange
-      selected={initialDate}
+      selected={endDate}
       onChange={onChange}
       onSelect={handleDateChange}
     />
