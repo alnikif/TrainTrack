@@ -1,13 +1,20 @@
-import React, { createContext, useState, ReactNode, Dispatch, SetStateAction } from 'react'
+import React, { createContext, useState, ReactNode, Dispatch, SetStateAction, useContext } from 'react'
+
+import getDatesList from '../utils/getDatesList'
+
+interface DateRangeType {
+  startDate: Date
+  endDate: Date | null
+}
 
 interface DateContextType {
-  selectedDate: { endDate: Date; startDate: Date }
-  setSelectedDate: Dispatch<SetStateAction<{ startDate: Date; endDate: Date }>>
+  dateRange: DateRangeType
+  setDateRange: Dispatch<SetStateAction<DateRangeType>>
 }
 
 const defaultDateContext: DateContextType = {
-  selectedDate: { startDate: new Date('2024-01-01'), endDate: new Date() },
-  setSelectedDate: () => {
+  dateRange: { startDate: new Date('2024-01-01'), endDate: new Date() },
+  setDateRange: () => {
     //
   },
 }
@@ -19,12 +26,23 @@ interface DateProviderProps {
 }
 
 export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
-  const [selectedDate, setSelectedDate] = useState({ startDate: new Date(), endDate: new Date() })
+  const [dateRange, setDateRange] = useState<DateRangeType>({ startDate: new Date(), endDate: null })
 
   const contextValue: DateContextType = {
-    selectedDate,
-    setSelectedDate,
+    dateRange: dateRange,
+    setDateRange,
   }
 
   return <DateContext.Provider value={contextValue}>{children}</DateContext.Provider>
+}
+
+export const useDate = () => {
+  const { dateRange, setDateRange } = useContext(DateContext)
+  const datesList = getDatesList(dateRange.startDate, dateRange.endDate)
+
+  return {
+    datesList,
+    dateRange,
+    setDateRange,
+  }
 }

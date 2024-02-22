@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 
 import Chart from '../../components/Chart/Chart'
-import { FilterDataContext } from '../../providers/HeartRateDataProvider'
+import { useHeartRateData } from '../../providers/HeartRateDataProvider'
 
 const HeartRateChart = () => {
-  const filteredData = useContext(FilterDataContext)
+  const filteredData = useHeartRateData()
 
   return <Chart data={filteredData} title="Heart Rate" />
 }

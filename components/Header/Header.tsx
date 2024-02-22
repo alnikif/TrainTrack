@@ -19,22 +19,24 @@ interface HeaderPropsType {
 }
 
 const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
-  const { selectedDate, setSelectedDate } = useContext(DateContext)
-  const { startDate, endDate } = selectedDate
+  const { dateRange, setDateRange } = useContext(DateContext)
+  const { startDate, endDate } = dateRange
 
   const currentDate = new Date()
-  const nextDate = getNextDay(endDate)
+  const nextDate = getNextDay(startDate)
   const isNextDayAvailable = new Date(getFormattedDate(nextDate)) <= new Date(getFormattedDate(currentDate))
 
   const onSelectPrevDay = () => {
-    const prevDate = getPrevDay(endDate)
-    setSelectedDate({ startDate: startDate, endDate: prevDate })
+    const prevDate = getPrevDay(startDate)
+    setDateRange({ startDate: prevDate, endDate: null })
   }
 
   const onSelectNextDay = () => {
     if (!isNextDayAvailable) return
-    setSelectedDate({ startDate: startDate, endDate: nextDate })
+    setDateRange({ startDate: nextDate, endDate: null })
   }
+
+  const handleTodayDate = () => setDateRange({ startDate: new Date(), endDate: null })
 
   return (
     <div className="flex flex-row justify-between border-b border-gray-300 p-2 w-full">
@@ -43,17 +45,21 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
           <BurgerMenuIcon />
         </IconButton>
         <Logo />
-        <Button title="Today" />
-        <IconButton className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none" onClick={onSelectPrevDay}>
-          <LeftArrowIcon />
-        </IconButton>
-        <IconButton
-          disabled={!isNextDayAvailable}
-          className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none"
-          onClick={onSelectNextDay}
-        >
-          <RightArrowIcon />
-        </IconButton>
+        <Button title="Today" onClick={handleTodayDate} />
+        {!endDate && (
+          <IconButton className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none" onClick={onSelectPrevDay}>
+            <LeftArrowIcon />
+          </IconButton>
+        )}
+        {!endDate && (
+          <IconButton
+            disabled={!isNextDayAvailable}
+            className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none"
+            onClick={onSelectNextDay}
+          >
+            <RightArrowIcon />
+          </IconButton>
+        )}
         <HeaderDate />
       </div>
       <div>

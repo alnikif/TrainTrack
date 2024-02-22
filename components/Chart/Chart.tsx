@@ -3,8 +3,9 @@ import HighchartsReact from 'highcharts-react-official'
 import React, { FC, useContext } from 'react'
 
 import { ChartTypeContext } from '../../providers/ChartTypesProvider'
+import { useDate } from '../../providers/DateProvider'
 import { ChartDataItem } from '../../types/chartData'
-import GetChartOptions from '../../utils/getChartOptions'
+import getChartOptions from '../../utils/getChartOptions'
 import ChartTypesDropdown from '../Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 
 interface ChartPropsType {
@@ -13,9 +14,10 @@ interface ChartPropsType {
 }
 
 const Chart: FC<ChartPropsType> = (props) => {
-  const { chartType } = useContext(ChartTypeContext)
   const { data, title } = props
-  const { options } = GetChartOptions(data, chartType, title, 'Calories')
+  const { chartType } = useContext(ChartTypeContext)
+  const { datesList } = useDate()
+  const { options } = getChartOptions(data, chartType, title, 'Calories', datesList)
 
   return (
     <div>

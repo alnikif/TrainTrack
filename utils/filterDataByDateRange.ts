@@ -1,6 +1,9 @@
 import { ChartDataItem } from '../types/chartData'
 
-const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endDate: Date) => {
+import { getNextDay } from './getNextDay'
+
+const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endDate: Date | null) => {
+  const finishDate = getNextDay(endDate || startDate)
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: 'numeric',
@@ -9,7 +12,7 @@ const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endD
   })
 
   const formattedStartDate = new Date(dateFormatter.format(startDate))
-  const formattedEndDate = new Date(dateFormatter.format(endDate))
+  const formattedEndDate = new Date(dateFormatter.format(finishDate))
 
   return dataArray.filter((item) => {
     const formattedEntryDateString = dateFormatter.format(new Date(item[0]))
