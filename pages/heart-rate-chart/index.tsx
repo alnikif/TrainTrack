@@ -6,7 +6,7 @@ import { useHeartRateData } from '../../providers/HeartRateDataProvider'
 const HeartRateChart = () => {
   const filteredData = useHeartRateData()
 
-  return <Chart data={filteredData} title="Heart Rate" />
+  return <Chart data={filteredData} title="Heart Rate" yTitle="Heart Rate" />
 }
 
 export default HeartRateChart

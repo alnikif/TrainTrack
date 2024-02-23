@@ -11,13 +11,14 @@ import ChartTypesDropdown from '../Dropdown/ChartTypesDropdown/ChartTypesDropdow
 interface ChartPropsType {
   data: ChartDataItem[]
   title: string
+  yTitle: string
 }
 
 const Chart: FC<ChartPropsType> = (props) => {
-  const { data, title } = props
+  const { data, title, yTitle } = props
   const { chartType } = useContext(ChartTypeContext)
   const { datesList } = useDate()
-  const { options } = getChartOptions(data, chartType, title, 'Calories', datesList)
+  const { options } = getChartOptions(data, chartType, title, yTitle, datesList)
 
   return (
     <div>
