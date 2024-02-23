@@ -36,6 +36,7 @@ function getChartOptions(data: ChartDataItem[], chartType: string, title: string
   const options = {
     chart: {
       type: chartType,
+      zoomType: 'x',
     },
     title: {
       text: title,

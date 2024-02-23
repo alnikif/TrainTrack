@@ -11,3 +11,4 @@ const Test = () => {
 }
 
 export default Test
+;('add')
