@@ -8,7 +8,7 @@ import { CaloriesDataContext } from '../../providers/CaloriesDataProvider'
 const CaloriesCounterChart = () => {
   const stepsData = useContext(CaloriesDataContext)
 
-  return <Chart data={stepsData} title="Calories Chart" yTitle="Steps" />
+  return <Chart data={stepsData} title="Calories Chart" yTitle="Calories" />
 }
 
 export default CaloriesCounterChart

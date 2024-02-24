@@ -38,6 +38,7 @@ function getChartOptions(data: ChartDataItem[], chartType: string, title: string
       type: chartType,
       zoomType: 'x',
     },
+
     title: {
       text: title,
     },
