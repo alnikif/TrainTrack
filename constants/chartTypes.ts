@@ -3,7 +3,6 @@ export enum ChartTypes {
   AreaChart = 'area',
   ColumnChart = 'column',
   BarChart = 'bar',
-  PieChar = 'pie',
   ScatterPlot = 'scatter',
 }
 
