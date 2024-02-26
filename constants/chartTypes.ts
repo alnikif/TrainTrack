@@ -2,8 +2,6 @@ export enum ChartTypes {
   LineChart = 'line',
   AreaChart = 'area',
   ColumnChart = 'column',
-  BarChart = 'bar',
-  ScatterPlot = 'scatter',
 }
 
 export interface ChartType {
