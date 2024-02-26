@@ -3,8 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import cx from 'classnames'
 import React, { useMemo, useState } from 'react'
 
-import styles from './Dropdown.module.scss'
-
 interface OptionItemType<T> {
   id: T
   label: string
@@ -35,23 +33,32 @@ const Dropdown = <T,>(props: DropdownPropsTypes<T>) => {
   }
 
   return (
-    <div className={styles.dropdown}>
-      <div className={styles.dropdownHeaderWrapper}>
+    <div className="border border-gray-300 text-xs font-bold box-border w-26 flex flex-col bg-white absolute left-32 z-10">
+      <div className="flex items-center p-1 justify-center">
         <FontAwesomeIcon icon={faChevronCircleDown} />
-        <div className={styles.dropdownHeader} onClick={onToggleDropdown}>
+        <div className="p-2 cursor-pointer flex justify-center items-center" onClick={onToggleDropdown}>
           {selectedOption?.label}
           <i className={`${isOpen && 'open'}`} />
         </div>
       </div>
-      <div className={cx(styles.dropdownBody, { [styles.open]: isOpen })}>
+      <div
+        className={cx('flex', 'flex-col', 'justify-start', 'border', 'border-solid', 'border-gray-300', 'w-full', {
+          block: isOpen,
+          hidden: !isOpen,
+        })}
+      >
         {options.map((item) => (
           <div
             id={String(item.id)}
             key={String(item.id)}
-            className={styles.dropdownItem}
+            className="p-3 hover:cursor-pointer"
             onClick={() => onSelectOption(item.id)}
           >
-            <span className={cx(styles.dropdownItemDot, { [styles.selected]: item.id == selectedOptionId })}>• </span>
+            <span
+              className={`transition-opacity duration-200 ${item.id === selectedOptionId ? 'opacity-100' : 'opacity-0 text-gray-600'}`}
+            >
+              •{' '}
+            </span>
             {item.label}
           </div>
         ))}

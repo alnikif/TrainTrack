@@ -54,7 +54,7 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
         {!endDate && (
           <IconButton
             disabled={!isNextDayAvailable}
-            className="bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none"
+            className={`${isNextDayAvailable ? '' : 'text-lightGray'} bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none`}
             onClick={onSelectNextDay}
           >
             <RightArrowIcon />
