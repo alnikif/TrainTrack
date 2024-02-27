@@ -2,13 +2,26 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import React, { useContext } from 'react'
 
-import Chart from '../../components/Chart/Chart'
+import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 import { CaloriesDataContext } from '../../providers/CaloriesDataProvider'
+import { ChartTypeContext } from '../../providers/ChartTypesProvider'
+import { useDate } from '../../providers/DateProvider'
+
+import getCaloriesChartOptions from './getCaloriesChartOptions'
 
 const CaloriesCounterChart = () => {
-  const stepsData = useContext(CaloriesDataContext)
+  const caloriesData = useContext(CaloriesDataContext)
 
-  return <Chart data={stepsData} title="Calories Chart" yTitle="Calories" />
+  const { chartType } = useContext(ChartTypeContext)
+  const { datesList } = useDate()
+  const { options } = getCaloriesChartOptions(caloriesData, chartType, 'Calories Chart', 'Calories', datesList)
+
+  return (
+    <div>
+      <ChartTypesDropdown />
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  )
 }
 
 export default CaloriesCounterChart

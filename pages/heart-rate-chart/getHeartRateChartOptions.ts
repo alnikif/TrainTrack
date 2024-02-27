@@ -1,7 +1,6 @@
-import { ChartDataItem } from '../types/chartData'
-
-import getDateFormattedTime from './getDateFormattedTime'
-import getFormattedDate from './getFormattedDate'
+import { ChartDataItem } from '../../types/chartData'
+import getDateFormattedTime from '../../utils/getDateFormattedTime'
+import getFormattedDate from '../../utils/getFormattedDate'
 
 const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: string[]) => {
   if (datesList?.length === 1) {
@@ -25,7 +24,13 @@ const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: strin
   ]
 }
 
-function getChartOptions(data: ChartDataItem[], chartType: string, title: string, yTitle: string, datesList: string[]) {
+function getHeartRateChartOptions(
+  data: ChartDataItem[],
+  chartType: string,
+  title: string,
+  yTitle: string,
+  datesList: string[],
+) {
   const seriesLength = datesList.length
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => getDateFormattedTime(item[0]))
@@ -57,4 +62,4 @@ function getChartOptions(data: ChartDataItem[], chartType: string, title: string
   return { options }
 }
 
-export default getChartOptions
+export default getHeartRateChartOptions

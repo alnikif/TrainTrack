@@ -1,7 +1,6 @@
-import { ChartDataItem } from '../types/chartData'
-
-import getDateFormattedTime from './getDateFormattedTime'
-import getFormattedDate from './getFormattedDate'
+import { ChartDataItem } from '../../types/chartData'
+import getDateFormattedTime from '../../utils/getDateFormattedTime'
+import getFormattedDate from '../../utils/getFormattedDate'
 
 const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: string[]) => {
   if (datesList?.length === 1) {
@@ -19,17 +18,21 @@ const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: strin
     {} as Record<string, number[]>,
   )
 
-  return [
-    { name: yTitle, data: Object.values(dateMap).map((item) => item[0]) },
-    { name: yTitle, data: Object.values(dateMap).map((item) => item[1]) },
-  ]
+  return [{ name: yTitle, data: Object.values(dateMap).map((item) => item[0]) }]
 }
 
-function getChartOptions(data: ChartDataItem[], chartType: string, title: string, yTitle: string, datesList: string[]) {
+function getStepsChartOptions(
+  data: ChartDataItem[],
+  chartType: string,
+  title: string,
+  yTitle: string,
+  datesList: string[],
+) {
   const seriesLength = datesList.length
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => getDateFormattedTime(item[0]))
   const seriesData = getChartSeries(data, yTitle, datesList)
+  console.log(seriesData)
 
   const options = {
     chart: {
@@ -57,4 +60,4 @@ function getChartOptions(data: ChartDataItem[], chartType: string, title: string
   return { options }
 }
 
-export default getChartOptions
+export default getStepsChartOptions
