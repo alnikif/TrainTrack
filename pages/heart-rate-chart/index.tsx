@@ -1,6 +1,6 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 import { ChartTypeContext } from '../../providers/ChartTypesProvider'
