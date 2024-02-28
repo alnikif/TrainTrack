@@ -26,7 +26,6 @@ function getChartOptions(data: ChartDataItem[], chartType: string, title: string
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => getDateFormattedTime(item[0]))
   const seriesData = getChartSeries(data, yTitle, datesList)
-  console.log(seriesData)
 
   const options = {
     chart: {

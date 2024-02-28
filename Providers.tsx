@@ -5,6 +5,7 @@ import ChartTypeProvider from './providers/ChartTypesProvider'
 import { DateProvider } from './providers/DateProvider'
 import { HeartRateDataProvider } from './providers/HeartRateDataProvider'
 import StepsCounterDataProvider from './providers/StepsCounterDataProvider'
+import TrainingsDataProvider from './providers/TrainingsDataProvider'
 
 interface ProvidersType {
   readonly children: ReactNode
@@ -18,7 +19,9 @@ const Providers: FC<ProvidersType> = (props) => {
       <ChartTypeProvider>
         <HeartRateDataProvider>
           <StepsCounterDataProvider>
-            <CaloriesDataProvider>{children}</CaloriesDataProvider>
+            <TrainingsDataProvider>
+              <CaloriesDataProvider>{children}</CaloriesDataProvider>
+            </TrainingsDataProvider>
           </StepsCounterDataProvider>
         </HeartRateDataProvider>
       </ChartTypeProvider>
