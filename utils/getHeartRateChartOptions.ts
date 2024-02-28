@@ -1,30 +1,48 @@
 import { ChartDataItem } from '../types/chartData'
+import getDateFormattedTime from '../utils/getDateFormattedTime'
+import getFormattedDate from '../utils/getFormattedDate'
 
-import getDateFormattedTime from './getDateFormattedTime'
+const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: string[]) => {
+  if (datesList?.length === 1) {
+    return [{ name: yTitle, data: data.map((item) => item[1]) }]
+  }
+
+  const dateMap = data.reduce(
+    (acc: Record<string, number[]>, item) => {
+      const formattedDate = getFormattedDate(item[0])
+      console.log(`${item[0]} ====> ${formattedDate}`)
+      return {
+        ...acc,
+        [formattedDate]: [...(acc[formattedDate] || []), item[1]],
+      }
+    },
+    {} as Record<string, number[]>,
+  )
+
+  return [
+    { name: yTitle, data: Object.values(dateMap).map((item) => item[0]) },
+    { name: yTitle, data: Object.values(dateMap).map((item) => item[1]) },
+  ]
+}
 
 function getHeartRateChartOptions(
   data: ChartDataItem[],
   chartType: string,
   title: string,
   yTitle: string,
-  highRateTitle: string,
-  lowRateTitle: string,
+  datesList: string[],
 ) {
-  const xAxisData = data.map((item) => getDateFormattedTime(item[0]))
+  const seriesLength = datesList.length
 
-  const seriesData = data.map((item) => item[1])
-
-  const highRate = data.filter((el) => {
-    return el[1] > 100
-  })
-  const lowRate = data.filter((el) => {
-    return el[1] < 100
-  })
+  const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => getDateFormattedTime(item[0]))
+  const seriesData = getChartSeries(data, yTitle, datesList)
 
   const options = {
     chart: {
       type: chartType,
+      zoomType: 'x',
     },
+
     title: {
       text: title,
     },
@@ -33,26 +51,20 @@ function getHeartRateChartOptions(
       title: {
         text: 'Date',
       },
-      categories: xAxisData,
+      categories: xAxisLabels,
     },
     yAxis: {
       title: {
         text: yTitle,
       },
     },
-    series: [
-      {
-        name: highRateTitle,
-        data: highRate,
-      },
-      {
-        name: lowRateTitle,
-        data: lowRate,
-      },
-    ],
+    series: seriesData,
+    accessibility: {
+      enabled: false,
+    },
   }
 
-  return options
+  return { options }
 }
 
 export default getHeartRateChartOptions

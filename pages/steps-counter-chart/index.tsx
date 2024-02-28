@@ -14,7 +14,7 @@ const StepsCounterChart = () => {
 
   const { chartType } = useContext(ChartTypeContext)
   const { datesList } = useDate()
-  const { options } = getStepsChartOptions(stepsData, chartType, 'Calories Chart', 'Calories', datesList)
+  const { options } = getStepsChartOptions(stepsData, chartType, 'Steps Counter Chart', 'Calories', datesList)
 
   return (
     <div>
