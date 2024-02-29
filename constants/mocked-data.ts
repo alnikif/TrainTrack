@@ -7,4 +7,4 @@ export const heartRateData = generateHeartRateData('2024-01-01', new Date(), 50,
 export const stepsCounterData = generateCumulativeStepsData('2024-01-01', new Date())
 export const caloriesData = generateCaloriesData('2024-01-01', new Date())
 
-export const trainingData = generateTrainingData('2024-01-01', new Date())
+export const trainingData = generateTrainingData('2024-02-28', new Date())

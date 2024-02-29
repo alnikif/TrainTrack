@@ -1,16 +1,12 @@
-import { ChartDataItem, ExerciseData } from '../../types/chartData'
+import { ChartDataItem, ExerciseData, ExerciseResult } from '../../types/chartData'
 import getDateFormattedTime from '../../utils/getDateFormattedTime'
 
-function getTrainingDataChartOptions(data: ExerciseData[], chartType: string, title: string, yTitle: string) {
-  const xAxisLabels = data.map((item) => item[0])
-  // const seriesData = data.map((item) => {
-  //   const valuesData: [number] = item[1].reduce((acc: [number], value: number) => {
-  //     return [...acc, value]
-  //   })
-  //   return valuesData
-  // })
-  const seriesData = data.map((item) => item[1])
-  console.log(seriesData)
+function getTrainingDataChartOptions(data: ExerciseResult[], chartType: string, title: string, yTitle: string) {
+  const seriesData = data.map((series, index) => ({
+    y: series.result,
+    name: series.title, // Use exercise title as the name for each data point
+  }))
+  console.log(seriesData, 'seriesData')
 
   const options = {
     chart: {
@@ -22,19 +18,23 @@ function getTrainingDataChartOptions(data: ExerciseData[], chartType: string, ti
       text: title,
     },
     xAxis: {
-      type: 'datetime',
+      type: 'category', // Use category type since the x-axis represents exercise titles
       title: {
-        text: 'Date',
+        text: 'Exercise',
       },
-      categories: xAxisLabels,
     },
     yAxis: {
       title: {
         text: yTitle,
       },
     },
-    series: seriesData,
+    series: [
+      {
+        data: seriesData,
+      },
+    ],
   }
+
   return { options }
 }
 
