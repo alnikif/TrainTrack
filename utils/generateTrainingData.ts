@@ -8,16 +8,19 @@ export const generateTrainingData = (startDateString: Date | string, endDateStri
   const endDate = new Date(endDateString) > currentDate ? currentDate : new Date(endDateString)
   const startDate = new Date(startDateString)
 
-  for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
-    const timestamp = d.toISOString()
-    const training = trainingMap[getWeekDayFromDate(d)]
-    if (training) {
-      const totalSum = training.map((exercise) => ({
-        title: exercise.title,
-        result: exercise.series.reduce((totalWeight, { reps, weight }) => totalWeight + reps * weight, 0),
-      }))
-      result.push(...totalSum)
-    }
+  // Определяем дату, за которую нужно сгенерировать данные
+  const selectedDate = new Date(startDate)
+
+  // Получаем данные только за выбранный день
+  const timestamp = selectedDate.toISOString()
+  const training = trainingMap[getWeekDayFromDate(selectedDate)]
+  if (training) {
+    const totalSum = training.map((exercise) => ({
+      title: exercise.title,
+      result: exercise.series.reduce((totalWeight, { reps, weight }) => totalWeight + reps * weight, 0),
+    }))
+    result.push(...totalSum)
   }
+
   return result
 }

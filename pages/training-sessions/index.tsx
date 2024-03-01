@@ -10,14 +10,14 @@ import { DateContext } from '../../providers/DateProvider'
 import getTrainingDataChartOptions from './getTrainingDataChartOptions'
 
 const TrainingSessionsChart = () => {
-  const { setDateRange } = useContext(DateContext)
+  const { setDateRange, dateRange } = useContext(DateContext)
 
   const { chartType } = useContext(ChartTypeContext)
   const { options } = getTrainingDataChartOptions(trainingData, chartType, 'Training Chart', 'Training')
 
-  useEffect(() => {
-    setDateRange({ startDate: new Date(), endDate: null })
-  }, [])
+  // useEffect(() => {
+  //   setDateRange({ startDate: new Date(), endDate: null })
+  // }, [])
   return (
     <>
       <ChartTypesDropdown />

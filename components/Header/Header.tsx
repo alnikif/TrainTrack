@@ -25,6 +25,8 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
   const currentDate = new Date()
   const nextDate = getNextDay(startDate)
   const isNextDayAvailable = new Date(getFormattedDate(nextDate)) <= new Date(getFormattedDate(currentDate))
+  console.log(isNextDayAvailable)
+  console.log(nextDate, 'next', currentDate, 'current')
 
   const onSelectPrevDay = () => {
     const prevDate = getPrevDay(startDate)
@@ -47,14 +49,14 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
         <Logo />
         <Button title="Today" onClick={handleTodayDate} />
         {!endDate && (
-          <IconButton className="bg-blue-500 font-bold py-2 px-4 rounded focus:outline-none" onClick={onSelectPrevDay}>
+          <IconButton className="font-bold py-2 px-4 rounded focus:outline-none" onClick={onSelectPrevDay}>
             <LeftArrowIcon />
           </IconButton>
         )}
         {!endDate && (
           <IconButton
             disabled={!isNextDayAvailable}
-            className={`${isNextDayAvailable ? 'text-lightGray' : ''} bg-blue-400 font-bold py-1 px-2 rounded focus:outline-none`}
+            className={`${isNextDayAvailable ? 'text-lightGray' : ''} font-bold py-1 px-2 rounded focus:outline-none`}
             onClick={onSelectNextDay}
           >
             <RightArrowIcon />
