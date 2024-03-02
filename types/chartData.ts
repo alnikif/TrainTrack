@@ -10,4 +10,5 @@ export interface Exercise {
 export interface ExerciseResult {
   title: string
   result: number
+  timestamp: string
 }

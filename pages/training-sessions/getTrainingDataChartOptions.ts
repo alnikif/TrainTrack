@@ -1,12 +1,36 @@
-import { ChartDataItem, ExerciseData, ExerciseResult } from '../../types/chartData'
+import { ChartDataItem, ExerciseResult } from '../../types/chartData'
 import getDateFormattedTime from '../../utils/getDateFormattedTime'
 import getFormattedDate from '../../utils/getFormattedDate'
 
-function getTrainingDataChartOptions(data: ExerciseResult[], chartType: string, title: string, yTitle: string) {
-  const seriesData = data.map((series, index) => ({
-    y: series.result,
-    name: series.title,
-  }))
+const getChartSeries = (data: ExerciseResult[], yTitle: string, datesList?: string[]) => {
+  if (datesList?.length === 1) {
+    return [{ name: yTitle, data: data.map((item) => item.result) }]
+  }
+
+  const dateMap = data.reduce(
+    (acc: Record<string, number[]>, item) => {
+      return {
+        ...acc,
+        [item.title]: [...(acc[item.title] || []), item.result],
+      }
+    },
+    {} as Record<string, number[]>,
+  )
+
+  return [{ name: yTitle, data: Object.values(dateMap).map((item) => item) }]
+}
+
+function getTrainingDataChartOptions(
+  data: ExerciseResult[],
+  chartType: string,
+  title: string,
+  yTitle: string,
+  datesList: string[],
+) {
+  const seriesLength = datesList.length
+
+  const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
+  const seriesData = getChartSeries(data, yTitle, datesList)
 
   const options = {
     chart: {
@@ -18,24 +42,56 @@ function getTrainingDataChartOptions(data: ExerciseResult[], chartType: string, 
       text: title,
     },
     xAxis: {
-      type: 'category',
+      type: 'datetime',
       title: {
-        text: 'Exercise',
+        text: 'Date',
       },
+      categories: xAxisLabels,
     },
     yAxis: {
       title: {
         text: yTitle,
       },
     },
-    series: [
-      {
-        data: seriesData,
-      },
-    ],
+    series: seriesData,
   }
-
   return { options }
 }
+
+// function getTrainingDataChartOptions(data: ExerciseResult[], chartType: string, title: string, yTitle: string) {
+//   const seriesData = data.map((series, index) => ({
+//     y: series.result,
+//     name: series.title,
+//   }))
+//
+//   const options = {
+//     chart: {
+//       type: chartType,
+//       zoomType: 'x',
+//     },
+//
+//     title: {
+//       text: title,
+//     },
+//     xAxis: {
+//       type: 'category',
+//       title: {
+//         text: 'Exercise',
+//       },
+//     },
+//     yAxis: {
+//       title: {
+//         text: yTitle,
+//       },
+//     },
+//     series: [
+//       {
+//         data: seriesData,
+//       },
+//     ],
+//   }
+//
+//   return { options }
+// }
 
 export default getTrainingDataChartOptions
