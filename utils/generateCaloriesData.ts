@@ -15,7 +15,6 @@ const generateCumulativeStepsData = (startDateString: Date | string, endDateStri
     total += d.getHours() > 0 && d.getHours() < 7 ? 0 : caloriesForHour
     data.push([timestamp, total])
   }
-
   return data
 }
 

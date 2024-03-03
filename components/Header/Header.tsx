@@ -25,8 +25,6 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
   const currentDate = new Date()
   const nextDate = getNextDay(startDate)
   const isNextDayAvailable = new Date(getFormattedDate(nextDate)) <= new Date(getFormattedDate(currentDate))
-  console.log(isNextDayAvailable)
-  console.log(nextDate, 'next', currentDate, 'current')
 
   const onSelectPrevDay = () => {
     const prevDate = getPrevDay(startDate)

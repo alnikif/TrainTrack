@@ -4,7 +4,7 @@ import { getNextDay } from './getNextDay'
 
 const filterDataByDateRange = (dataArray: ExerciseResult[], startDate: Date, endDate: Date | null) => {
   const finishDate = getNextDay(endDate || startDate)
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  const dateFormatter = new Intl.DateTimeFormat('UTC', {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',

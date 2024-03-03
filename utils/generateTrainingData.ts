@@ -1,6 +1,6 @@
 import { trainingMap } from '../constants/trainingSessionData'
 import { getWeekDayFromDate } from '../constants/weekDays'
-import { Exercise, ExerciseResult } from '../types/chartData'
+import { ExerciseResult } from '../types/chartData'
 
 export const generateTrainingData = (startDateString: Date | string, endDateString: Date | string) => {
   const result: ExerciseResult[] = []

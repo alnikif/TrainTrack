@@ -1,8 +1,7 @@
 import React, { createContext, FC, ReactNode, useContext } from 'react'
 
-import { caloriesData, trainingData } from '../constants/mocked-data'
-import { ExerciseData, ExerciseResult } from '../types/chartData'
-import filterDataByDateRange from '../utils/filterDataByDateRange'
+import { trainingData } from '../constants/mocked-data'
+import { ExerciseResult } from '../types/chartData'
 import filteredTrainingDataByDateRange from '../utils/filteredTrainingDataByDateRange'
 
 import { DateContext } from './DateProvider'

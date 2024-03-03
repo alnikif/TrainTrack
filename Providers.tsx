@@ -17,13 +17,13 @@ const Providers: FC<ProvidersType> = (props) => {
   return (
     <DateProvider>
       <ChartTypeProvider>
-        <HeartRateDataProvider>
-          <StepsCounterDataProvider>
-            <TrainingsDataProvider>
+        <TrainingsDataProvider>
+          <HeartRateDataProvider>
+            <StepsCounterDataProvider>
               <CaloriesDataProvider>{children}</CaloriesDataProvider>
-            </TrainingsDataProvider>
-          </StepsCounterDataProvider>
-        </HeartRateDataProvider>
+            </StepsCounterDataProvider>
+          </HeartRateDataProvider>
+        </TrainingsDataProvider>
       </ChartTypeProvider>
     </DateProvider>
   )
