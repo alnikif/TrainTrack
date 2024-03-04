@@ -5,5 +5,5 @@ interface TodayDatePropsType {
 export const getTodaysMonthAndYear = ({ todayDate }: TodayDatePropsType) => {
   const today = todayDate
   const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' }
-  return new Intl.DateTimeFormat('en-US', options).format(today)
+  return new Intl.DateTimeFormat('UTC', options).format(today)
 }

@@ -16,9 +16,9 @@ const TrainingSessionsChart = () => {
   const { datesList } = useDate()
   const { options } = getTrainingDataChartOptions(trainingData, chartType, 'Training Chart', 'Training', datesList)
 
-  useEffect(() => {
-    setDateRange({ startDate: new Date(), endDate: null })
-  }, [])
+  // useEffect(() => {
+  //   setDateRange({ startDate: new Date(), endDate: null })
+  // }, [])
   return (
     <>
       <ChartTypesDropdown />
