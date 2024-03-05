@@ -8,7 +8,7 @@ export const generateTrainingData = (startDateString: Date | string, endDateStri
   const endDate = new Date(endDateString) > currentDate ? currentDate : new Date(endDateString)
   const startDate = new Date(startDateString)
   let total = []
-
+  console.log(startDate, 'startDate')
   for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
     const timestamp = d.toISOString()
     const training = trainingMap[getWeekDayFromDate(d)]

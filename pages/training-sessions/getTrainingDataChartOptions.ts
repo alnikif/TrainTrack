@@ -1,4 +1,8 @@
-import { ExerciseResult } from '../../types/chartData'
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+
+import { trainingMap } from '../../constants/trainingSessionData'
+import { getWeekDayFromDate } from '../../constants/weekDays'
+import { Exercise, ExerciseResult } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
 
 const getChartSeries = (data: ExerciseResult[], yTitle: string, datesList?: string[]) => {
@@ -25,18 +29,32 @@ function getTrainingDataChartOptions(
   title: string,
   yTitle: string,
   datesList: string[],
+  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null | undefined>>,
 ) {
   const seriesLength = datesList.length
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
 
-  console.log(seriesData, 'seriesData')
+  const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
+    if (event) {
+      setSelectedTraining(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
+      console.log(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
+      console.log(event.point.index)
+    }
+  }
 
   const options = {
     chart: {
       type: chartType,
       zoomType: 'x',
+    },
+    plotOptions: {
+      series: {
+        events: {
+          click: (event: any) => getSelectedTraining(event, data),
+        },
+      },
     },
 
     title: {
