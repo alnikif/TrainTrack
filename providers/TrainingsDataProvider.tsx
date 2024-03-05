@@ -2,7 +2,7 @@ import React, { createContext, FC, ReactNode, useContext } from 'react'
 
 import { trainingData } from '../constants/mocked-data'
 import { ExerciseResult } from '../types/chartData'
-import filteredTrainingDataByDateRange from '../utils/filteredTrainingDataByDateRange'
+import filterDataByDateRange from '../utils/filterDataByDateRange'
 
 import { DateContext } from './DateProvider'
 
@@ -16,7 +16,7 @@ const TrainingsDataProvider: FC<TrainingsDataProviderProps> = ({ children }) => 
   const { dateRange: selectedDate } = useContext(DateContext)
   const { startDate, endDate } = selectedDate
 
-  const defaultDataContext = filteredTrainingDataByDateRange(trainingData, startDate, endDate)
+  const defaultDataContext = filterDataByDateRange(trainingData, startDate, endDate)
 
   return <TrainingsDataContext.Provider value={defaultDataContext}>{children}</TrainingsDataContext.Provider>
 }

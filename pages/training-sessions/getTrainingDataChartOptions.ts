@@ -1,23 +1,22 @@
-import { ChartDataItem, ExerciseResult } from '../../types/chartData'
-import getDateFormattedTime from '../../utils/getDateFormattedTime'
+import { ExerciseResult } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
 
 const getChartSeries = (data: ExerciseResult[], yTitle: string, datesList?: string[]) => {
   if (datesList?.length === 1) {
     return [{ name: yTitle, data: data.map((item) => item.result) }]
   }
-
   const dateMap = data.reduce(
-    (acc: Record<string, number[]>, item) => {
+    (acc: Record<string, unknown[]>, item) => {
+      const formattedDate = getFormattedDate(item.timestamp)
       return {
         ...acc,
-        [item.title]: [...(acc[item.title] || []), item.result],
+        [formattedDate]: [...(acc[formattedDate] || []), item.sum],
       }
     },
     {} as Record<string, number[]>,
   )
 
-  return [{ name: yTitle, data: Object.values(dateMap).map((item) => item) }]
+  return [{ name: yTitle, data: Object.values(dateMap).map((item) => item[0]) }]
 }
 
 function getTrainingDataChartOptions(
@@ -31,6 +30,8 @@ function getTrainingDataChartOptions(
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
+
+  console.log(seriesData, 'seriesData')
 
   const options = {
     chart: {

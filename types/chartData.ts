@@ -11,4 +11,5 @@ export interface ExerciseResult {
   title: string
   result: number
   timestamp: string
+  sum?: number
 }

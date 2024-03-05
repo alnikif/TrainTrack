@@ -13,15 +13,22 @@ export const generateTrainingData = (startDateString: Date | string, endDateStri
     const timestamp = d.toISOString()
     const training = trainingMap[getWeekDayFromDate(d)]
     if (training) {
+      const exerciseSum = training.map((item) => {
+        return item.series.reduce((totalWeight, { reps, weight }) => totalWeight + reps * weight, 0)
+      })
+      const trainingSum = exerciseSum.reduce((acc, item) => acc + item, 0)
       const totalSum = training.map((exercise) => ({
         timestamp: timestamp,
         title: exercise.title,
         result: exercise.series.reduce((totalWeight, { reps, weight }) => totalWeight + reps * weight, 0),
+        sum: trainingSum,
       }))
+
       total = totalSum
       result.push(...total)
       total = []
     }
   }
+
   return result
 }

@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react'
+import { FC, useContext } from 'react'
 
 import LeftArrowIcon from '../../icons/LeftArrowIcon'
 import RightArrowIcon from '../../icons/RightArrowIcon'
@@ -54,7 +54,7 @@ const Header: FC<HeaderPropsType> = ({ onToggleMenu }) => {
         {!endDate && (
           <IconButton
             disabled={!isNextDayAvailable}
-            className={`${isNextDayAvailable ? 'text-lightGray' : ''} font-bold py-1 px-2 rounded focus:outline-none`}
+            className={`${isNextDayAvailable ? '' : 'text-lightGray'} font-bold py-1 px-2 rounded focus:outline-none`}
             onClick={onSelectNextDay}
           >
             <RightArrowIcon />

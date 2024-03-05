@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode, Dispatch, SetStateAction, useContext } from 'react'
+import React, { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from 'react'
 
 import getDatesList from '../utils/getDatesList'
 
@@ -43,6 +43,8 @@ export const useDate = () => {
   return {
     datesList,
     dateRange,
+    startDate: dateRange.startDate,
+    endDate: dateRange.endDate,
     setDateRange,
   }
 }

@@ -2,7 +2,17 @@ import { ChartDataItem, ExerciseResult } from '../types/chartData'
 
 import { getNextDay } from './getNextDay'
 
-const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endDate: Date | null) => {
+type DataArrayType = [string, unknown]
+
+function isExerciseResultType(item: any): item is ExerciseResult {
+  return 'timestamp' in item
+}
+
+const filterDataByDateRange = <T extends ExerciseResult | ChartDataItem>(
+  dataArray: T[],
+  startDate: Date,
+  endDate: Date | null,
+) => {
   const finishDate = getNextDay(endDate || startDate)
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
@@ -15,7 +25,10 @@ const filterDataByDateRange = (dataArray: ChartDataItem[], startDate: Date, endD
   const formattedEndDate = new Date(dateFormatter.format(finishDate))
 
   return dataArray.filter((item) => {
-    const formattedEntryDateString = dateFormatter.format(new Date(item[0]))
+    const isExerciseResult = isExerciseResultType(item)
+    const timestemp = isExerciseResult ? item.timestamp : item[0]
+
+    const formattedEntryDateString = dateFormatter.format(new Date(timestemp))
     const formattedEntryDate = new Date(formattedEntryDateString)
 
     return formattedEntryDate >= formattedStartDate && formattedEntryDate < formattedEndDate
