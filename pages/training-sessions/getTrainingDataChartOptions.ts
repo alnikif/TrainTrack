@@ -32,15 +32,13 @@ function getTrainingDataChartOptions(
   setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null | undefined>>,
 ) {
   const seriesLength = datesList.length
-
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
 
   const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
     if (event) {
       setSelectedTraining(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
-      console.log(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
-      console.log(event.point.index)
+      console.log(data[event.point.index], 'training data')
     }
   }
 

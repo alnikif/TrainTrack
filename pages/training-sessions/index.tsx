@@ -29,7 +29,7 @@ const TrainingSessionsChart = () => {
   )
 
   useMemo(() => {
-    console.log(selectedTraining)
+    // console.log(selectedTraining, 'selected training')
   }, [selectedTraining])
 
   return (
