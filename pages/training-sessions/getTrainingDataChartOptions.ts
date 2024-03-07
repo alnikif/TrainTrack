@@ -34,12 +34,32 @@ function getTrainingDataChartOptions(
   const seriesLength = datesList.length
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
+  console.log(seriesData, 'seriesData')
 
   const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
-    if (event) {
-      setSelectedTraining(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
-      console.log(data[event.point.index], 'training data')
+    if (datesList?.length === 1 && event) {
+      // setSelectedTraining(data.map((item) => item.training)
     }
+
+    const dateMap = data.reduce(
+      (acc: Record<string, any>, item) => {
+        const formattedDate = getFormattedDate(item.timestamp)
+        return {
+          ...acc,
+          [formattedDate]: [...(acc[formattedDate] || []), item.training],
+        }
+      },
+      {} as Record<string, any>,
+    )
+    if (event) {
+      console.log(Object.values(dateMap)[event.point.index][0], 'test')
+      setSelectedTraining(Object.values(dateMap)[event.point.index][0])
+    }
+
+    // if (event) {
+    //   setSelectedTraining(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
+    //   console.log(data[event.point.index], 'training data')
+    // }
   }
 
   const options = {

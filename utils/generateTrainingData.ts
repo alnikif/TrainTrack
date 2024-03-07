@@ -7,7 +7,7 @@ export const generateTrainingData = (startDateString: Date | string, endDateStri
   const currentDate = new Date()
   const endDate = new Date(endDateString) > currentDate ? currentDate : new Date(endDateString)
   const startDate = new Date(startDateString)
-  const trainingList: Exercise[][] = []
+  const trainingList = []
   let total = []
   for (let d = startDate; d <= endDate; d.setDate(d.getDate() + 1)) {
     const timestamp = d.toISOString()
@@ -24,7 +24,7 @@ export const generateTrainingData = (startDateString: Date | string, endDateStri
         title: exercise.title,
         result: exercise.series.reduce((totalWeight, { reps, weight }) => totalWeight + reps * weight, 0),
         sum: trainingSum,
-        training: trainingList,
+        training: training,
       }))
 
       total = totalData

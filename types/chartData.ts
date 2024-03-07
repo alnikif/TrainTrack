@@ -12,5 +12,5 @@ export interface ExerciseResult {
   result: number
   timestamp: string
   sum?: number
-  training: Exercise[][]
+  training: Exercise[]
 }
