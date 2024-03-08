@@ -1,7 +1,5 @@
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 
-import { trainingMap } from '../../constants/trainingSessionData'
-import { getWeekDayFromDate } from '../../constants/weekDays'
 import { Exercise, ExerciseResult } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
 
@@ -29,18 +27,16 @@ function getTrainingDataChartOptions(
   title: string,
   yTitle: string,
   datesList: string[],
-  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null | undefined>>,
+  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | ExerciseResult[] | null | undefined>>,
 ) {
   const seriesLength = datesList.length
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
-  console.log(seriesData, 'seriesData')
 
   const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
-    if (datesList?.length === 1 && event) {
-      // setSelectedTraining(data.map((item) => item.training)
+    if (datesList?.length === 1) {
+      setSelectedTraining(data)
     }
-
     const dateMap = data.reduce(
       (acc: Record<string, any>, item) => {
         const formattedDate = getFormattedDate(item.timestamp)
@@ -51,15 +47,9 @@ function getTrainingDataChartOptions(
       },
       {} as Record<string, any>,
     )
-    if (event) {
-      console.log(Object.values(dateMap)[event.point.index][0], 'test')
+    if (event && datesList.length > 1) {
       setSelectedTraining(Object.values(dateMap)[event.point.index][0])
     }
-
-    // if (event) {
-    //   setSelectedTraining(trainingMap[getWeekDayFromDate(new Date(data[event.point.index].timestamp))])
-    //   console.log(data[event.point.index], 'training data')
-    // }
   }
 
   const options = {
