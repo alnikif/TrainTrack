@@ -31,7 +31,11 @@ const TrainingSessionsChart = () => {
       <ChartTypesDropdown />
       <HighchartsReact highcharts={Highcharts} options={options} />
       {selectedTraining?.map((el, index) => {
-        return <div key={index}>{el.title}</div>
+        return (
+          <div className="ml-10" key={index}>
+            {el.title}
+          </div>
+        )
       })}
     </>
   )
