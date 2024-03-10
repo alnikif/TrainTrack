@@ -16,7 +16,7 @@ const TrainingSessionsChart = () => {
   const { datesList, startDate, endDate } = useDate()
   const { chartType } = useContext(ChartTypeContext)
   const dateRangeData = filterDataByDateRange(trainingData, startDate, endDate)
-  const [selectedTraining, setSelectedTraining] = useState<ExerciseResult[] | null | undefined>()
+  const [selectedTraining, setSelectedTraining] = useState<Exercise[] | null | undefined>()
 
   const { options } = getTrainingDataChartOptions(
     dateRangeData,

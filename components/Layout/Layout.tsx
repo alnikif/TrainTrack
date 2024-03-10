@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Header onToggleMenu={onToggleMenu} />
       <div className="flex flex-row justify-items-start w-full h-full">
         <div
-          className={`transform transition-transform overflow-hidden duration-500 ease-in-out ${isOpen ? 'translate-x-0 w-1/6 p-3' : '-translate-x-full w-0'}`}
+          className={`transform transition-transform  duration-500 ease-in-out ${isOpen ? 'translate-x-0 w-1/6 p-3' : '-translate-x-full w-0'}`}
         >
           <Calendar />
         </div>

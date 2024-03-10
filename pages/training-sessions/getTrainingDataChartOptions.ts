@@ -27,16 +27,16 @@ function getTrainingDataChartOptions(
   title: string,
   yTitle: string,
   datesList: string[],
-  setSelectedTraining: Dispatch<SetStateAction<ExerciseResult[] | null | undefined>>,
+  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null | undefined>>,
 ) {
   const seriesLength = datesList.length
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
   const seriesData = getChartSeries(data, yTitle, datesList)
 
   const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
-    if (datesList?.length === 1) {
-      setSelectedTraining(data)
-    }
+    // if (datesList?.length === 1) {
+    //   setSelectedTraining(data)
+    // }
 
     const dateMap = data.reduce(
       (acc: Record<string, any>, item) => {
@@ -50,6 +50,10 @@ function getTrainingDataChartOptions(
     )
     if (event && datesList.length > 1) {
       setSelectedTraining(Object.values(dateMap)[event.point.index][0])
+      console.log(Object.values(dateMap)[event.point.index][0], 'test')
+    } else if (event && datesList.length === 1) {
+      setSelectedTraining(Object.values(dateMap)[0][0])
+      console.log(Object.values(dateMap)[0][0], 'test2')
     }
   }
 
