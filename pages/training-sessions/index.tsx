@@ -3,6 +3,7 @@ import HighchartsReact from 'highcharts-react-official'
 import { useContext, useState } from 'react'
 
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
+import ExerciseList from '../../components/ExerciseList/ExerciseList'
 import { trainingData } from '../../constants/mocked-data'
 import { ChartTypeContext } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
@@ -15,7 +16,7 @@ const TrainingSessionsChart = () => {
   const { datesList, startDate, endDate } = useDate()
   const { chartType } = useContext(ChartTypeContext)
   const dateRangeData = filterDataByDateRange(trainingData, startDate, endDate)
-  const [selectedTraining, setSelectedTraining] = useState<Exercise[] | ExerciseResult[] | null | undefined>()
+  const [selectedTraining, setSelectedTraining] = useState<ExerciseResult[] | null | undefined>()
 
   const { options } = getTrainingDataChartOptions(
     dateRangeData,
@@ -25,18 +26,11 @@ const TrainingSessionsChart = () => {
     datesList,
     setSelectedTraining,
   )
-
   return (
     <>
       <ChartTypesDropdown />
       <HighchartsReact highcharts={Highcharts} options={options} />
-      {selectedTraining?.map((el, index) => {
-        return (
-          <div className="ml-10" key={index}>
-            {el.title}
-          </div>
-        )
-      })}
+      <ExerciseList exercisesList={selectedTraining} />
     </>
   )
 }

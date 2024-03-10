@@ -27,7 +27,7 @@ function getTrainingDataChartOptions(
   title: string,
   yTitle: string,
   datesList: string[],
-  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | ExerciseResult[] | null | undefined>>,
+  setSelectedTraining: Dispatch<SetStateAction<ExerciseResult[] | null | undefined>>,
 ) {
   const seriesLength = datesList.length
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
@@ -37,6 +37,7 @@ function getTrainingDataChartOptions(
     if (datesList?.length === 1) {
       setSelectedTraining(data)
     }
+
     const dateMap = data.reduce(
       (acc: Record<string, any>, item) => {
         const formattedDate = getFormattedDate(item.timestamp)
