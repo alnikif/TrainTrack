@@ -34,10 +34,6 @@ function getTrainingDataChartOptions(
   const seriesData = getChartSeries(data, yTitle, datesList)
 
   const getSelectedTraining = (event: any, data: ExerciseResult[]) => {
-    // if (datesList?.length === 1) {
-    //   setSelectedTraining(data)
-    // }
-
     const dateMap = data.reduce(
       (acc: Record<string, any>, item) => {
         const formattedDate = getFormattedDate(item.timestamp)
@@ -50,10 +46,8 @@ function getTrainingDataChartOptions(
     )
     if (event && datesList.length > 1) {
       setSelectedTraining(Object.values(dateMap)[event.point.index][0])
-      console.log(Object.values(dateMap)[event.point.index][0], 'test')
     } else if (event && datesList.length === 1) {
       setSelectedTraining(Object.values(dateMap)[0][0])
-      console.log(Object.values(dateMap)[0][0], 'test2')
     }
   }
 
