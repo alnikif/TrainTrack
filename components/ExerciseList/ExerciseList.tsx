@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 
-import { Exercise, ExerciseResult } from '../../types/chartData'
+import { Exercise } from '../../types/chartData'
 
 interface ExerciseListPropsType {
-  exercisesList: Exercise[] | null | undefined
+  exercisesList: Exercise[] | null
 }
 
 const ExerciseList: FC<ExerciseListPropsType> = ({ exercisesList }) => {

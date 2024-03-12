@@ -27,7 +27,7 @@ function getTrainingDataChartOptions(
   title: string,
   yTitle: string,
   datesList: string[],
-  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null | undefined>>,
+  setSelectedTraining: Dispatch<SetStateAction<Exercise[] | null>>,
 ) {
   const seriesLength = datesList.length
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => item.title)
