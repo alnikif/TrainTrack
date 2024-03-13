@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, createContext, useState, useMemo } from 'react'
+import React, { FC, ReactNode, createContext, useState, useMemo, useContext } from 'react'
 
 import { ChartTypes, DEFAULT_CHART } from '../constants/chartTypes'
 
@@ -14,7 +14,7 @@ const defaultChartTypeContext = {
   },
 }
 
-export const ChartTypeContext = createContext<ChartTypeContextType>(defaultChartTypeContext)
+const ChartTypeContext = createContext<ChartTypeContextType>(defaultChartTypeContext)
 
 interface ProvidersType {
   readonly children: ReactNode
@@ -36,4 +36,6 @@ const ChartTypeProvider: FC<ProvidersType> = (props) => {
   return <ChartTypeContext.Provider value={chartTypesContextValue}>{children}</ChartTypeContext.Provider>
 }
 
-export default ChartTypeProvider
+const useChart = () => useContext(ChartTypeContext)
+
+export { ChartTypeProvider, useChart }

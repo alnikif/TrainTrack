@@ -1,16 +1,20 @@
-export type ExerciseData = [any, any]
-
 export type ChartDataItem = [string, number]
+
+export interface SeriesItem {
+  reps: number
+  weight: number
+}
 
 export interface Exercise {
   title: string
-  series: { reps: number; weight: number }[]
+  series: SeriesItem[]
 }
 
-export interface ExerciseResult {
+export interface TrainingDetails {
   title: string
   result: number
-  timestamp: string
   sum?: number
-  training: Exercise[]
+  series: SeriesItem[]
 }
+
+export type ExerciseResult = [string, TrainingDetails[]]

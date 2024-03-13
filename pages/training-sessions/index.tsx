@@ -1,36 +1,48 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { useContext, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 import ExerciseList from '../../components/ExerciseList/ExerciseList'
-import { trainingData } from '../../constants/mocked-data'
-import { ChartTypeContext } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
-import { Exercise, ExerciseResult } from '../../types/chartData'
-import filterDataByDateRange from '../../utils/filterDataByDateRange'
-
-import getTrainingDataChartOptions from './getTrainingDataChartOptions'
+import { useTrainingsData } from '../../providers/TrainingsDataProvider'
+import { TrainingDetails } from '../../types/chartData'
+import getFormattedDate from '../../utils/getFormattedDate'
+import useTrainingChartOptions from '../training-sessions/getTrainingDataChartOptions'
 
 const TrainingSessionsChart = () => {
-  const { datesList, startDate, endDate } = useDate()
-  const { chartType } = useContext(ChartTypeContext)
-  const dateRangeData = filterDataByDateRange(trainingData, startDate, endDate)
-  const [selectedTraining, setSelectedTraining] = useState<Exercise[] | null | undefined>()
+  const { datesList, startDate } = useDate()
+  const { dataMap } = useTrainingsData()
 
-  const { options } = getTrainingDataChartOptions(
-    dateRangeData,
-    chartType,
-    'Training Chart',
-    'Training',
-    datesList,
-    setSelectedTraining,
+  const [trainingDetails, setTrainingDetails] = useState<TrainingDetails[] | null>(null)
+
+  const startDateTraining = useMemo(() => {
+    const dateTrainingKey = getFormattedDate(startDate)
+    return dataMap[dateTrainingKey]
+  }, [dataMap, startDate])
+
+  useEffect(() => {
+    if (datesList.length === 1 && startDate) {
+      setTrainingDetails(startDateTraining)
+    }
+  }, [datesList, startDate, startDateTraining])
+
+  const onBarClick = useCallback(
+    (pointCategory: string) => {
+      const pointTraining = dataMap[pointCategory]
+      const targetTraining = datesList.length > 1 ? pointTraining : startDateTraining
+      setTrainingDetails(targetTraining)
+    },
+    [dataMap, datesList, startDateTraining],
   )
+
+  const { options } = useTrainingChartOptions(datesList, onBarClick)
+
   return (
     <>
       <ChartTypesDropdown />
       <HighchartsReact highcharts={Highcharts} options={options} />
-      <ExerciseList exercisesList={selectedTraining} />
+      <ExerciseList trainingDetails={trainingDetails || []} />
     </>
   )
 }

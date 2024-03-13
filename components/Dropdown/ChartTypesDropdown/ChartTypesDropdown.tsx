@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
-
 import { chartTypesArray } from '../../../constants/chartTypes'
-import { ChartTypeContext } from '../../../providers/ChartTypesProvider'
+import { useChart } from '../../../providers/ChartTypesProvider'
 import Dropdown from '../DropdownComponent/Dropdown'
 
 const ChartTypesDropdown = () => {
-  const { chartType, setChartType } = useContext(ChartTypeContext)
+  const { chartType, setChartType } = useChart()
 
   const chartTypesOptions = chartTypesArray.map(({ key, title }) => ({
     id: key,

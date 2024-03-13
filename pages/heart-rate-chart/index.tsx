@@ -1,20 +1,19 @@
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
-import { ChartTypeContext } from '../../providers/ChartTypesProvider'
+import { useChart } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
-import { useHeartRateData } from '../../providers/HeartRateDataProvider'
-
-import getHeartRateChartOptions from './getHeartRateChartOptions'
+import { HeartRateDataContext } from '../../providers/HeartRateDataProvider'
+import getHeartRateChartOptions from '../../utils/getHeartRateChartOptions'
 
 const HeartRateChart = () => {
-  const filteredData = useHeartRateData()
-
-  const { chartType } = useContext(ChartTypeContext)
   const { datesList } = useDate()
-  const { options } = getHeartRateChartOptions(filteredData, chartType, 'Heart Rate Chart', 'Heart Rate', datesList)
+  const { chartType } = useChart()
+  const filteredData = useContext(HeartRateDataContext)
+
+  const options = getHeartRateChartOptions(filteredData, chartType, 'Heart Rate', 'High', datesList)
 
   return (
     <div>

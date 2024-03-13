@@ -1,11 +1,11 @@
 import React, { FC, ReactNode } from 'react'
 
-import CaloriesDataProvider, { CaloriesDataContext } from './providers/CaloriesDataProvider'
-import ChartTypeProvider from './providers/ChartTypesProvider'
+import CaloriesDataProvider from './providers/CaloriesDataProvider'
+import { ChartTypeProvider } from './providers/ChartTypesProvider'
 import { DateProvider } from './providers/DateProvider'
 import { HeartRateDataProvider } from './providers/HeartRateDataProvider'
 import StepsCounterDataProvider from './providers/StepsCounterDataProvider'
-import TrainingsDataProvider from './providers/TrainingsDataProvider'
+import { TrainingsDataProvider } from './providers/TrainingsDataProvider'
 
 interface ProvidersType {
   readonly children: ReactNode
