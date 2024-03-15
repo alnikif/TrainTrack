@@ -8,7 +8,8 @@ import { useDate } from '../../providers/DateProvider'
 import { useTrainingsData } from '../../providers/TrainingsDataProvider'
 import { TrainingDetails } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
-import useTrainingChartOptions from '../training-sessions/getTrainingDataChartOptions'
+
+import useTrainingChartOptions from './getTrainingDataChartOptions'
 
 const TrainingSessionsChart = () => {
   const { datesList, startDate } = useDate()

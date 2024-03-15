@@ -43,8 +43,6 @@ const useTrainingChartOptions = (datesList: string[], onBarClick: (pointCategory
   const xAxisLabels = getXAxisLabels(seriesLength, trainingData, datesList)
   const seriesData = getSeries(trainingData, seriesLength)
 
-  console.log(trainingData, 'trainingData')
-
   const options = {
     chart: { type: chartType, zoomType: 'x' },
     plotOptions: {

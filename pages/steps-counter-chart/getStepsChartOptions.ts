@@ -1,3 +1,5 @@
+import sum from 'lodash/sum'
+
 import { ChartDataItem } from '../../types/chartData'
 import getDateFormattedTime from '../../utils/getDateFormattedTime'
 import getFormattedDate from '../../utils/getFormattedDate'
@@ -18,7 +20,7 @@ const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: strin
     {} as Record<string, number[]>,
   )
 
-  return [{ name: yTitle, data: Object.values(dateMap).map((item) => item[0]) }]
+  return [{ name: yTitle, data: Object.values(dateMap).map((item) => sum(item)) }]
 }
 
 function getStepsChartOptions(
