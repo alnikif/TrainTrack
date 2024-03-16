@@ -8,7 +8,7 @@ const Y_TITLE = 'Training'
 
 const getXAxisLabels = (seriesLength: number, trainingData: ExerciseResult[], datesList: string[]) => {
   if (seriesLength === 1) {
-    const [_, exercises] = trainingData[0]
+    const [_, exercises = []] = trainingData?.[0] || []
     return exercises.map((item) => item.title)
   }
 
@@ -17,7 +17,7 @@ const getXAxisLabels = (seriesLength: number, trainingData: ExerciseResult[], da
 
 const getSeries = (trainingData: ExerciseResult[], seriesLength: number) => {
   if (seriesLength === 1) {
-    const [_, exercises] = trainingData[0]
+    const [_, exercises = []] = trainingData?.[0] || []
     return [{ name: Y_TITLE, data: exercises.map((item) => item.result) }]
   }
 
@@ -38,7 +38,6 @@ const getSeries = (trainingData: ExerciseResult[], seriesLength: number) => {
 const useTrainingChartOptions = (datesList: string[], onBarClick: (pointCategory: string) => void) => {
   const { chartType } = useChart()
   const { trainingData, dataMap } = useTrainingsData()
-
   const seriesLength = datesList.length
   const xAxisLabels = getXAxisLabels(seriesLength, trainingData, datesList)
   const seriesData = getSeries(trainingData, seriesLength)

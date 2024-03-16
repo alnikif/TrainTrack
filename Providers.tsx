@@ -1,3 +1,4 @@
+'use client'
 import React, { FC, ReactNode } from 'react'
 
 import CaloriesDataProvider from './providers/CaloriesDataProvider'

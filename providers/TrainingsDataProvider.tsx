@@ -1,3 +1,4 @@
+'use client'
 import React, { createContext, FC, ReactNode, useContext, useMemo } from 'react'
 
 import { trainingData } from '../constants/mocked-data'
@@ -16,7 +17,6 @@ export const TrainingsDataContext = createContext<ExerciseResult[]>([])
 const TrainingsDataProvider: FC<TrainingsDataProviderProps> = ({ children }) => {
   const { dateRange } = useDate()
   const { startDate, endDate } = dateRange
-
   const defaultDataContext = filterDataByDateRange(trainingData, startDate, endDate)
 
   return <TrainingsDataContext.Provider value={defaultDataContext}>{children}</TrainingsDataContext.Provider>
