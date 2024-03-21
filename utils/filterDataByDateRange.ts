@@ -9,9 +9,8 @@ const filterDataByDateRange = <T extends ExerciseResult | ChartDataItem>(
   endDate: Date | null,
 ) => {
   const finishDate = getNextDay(endDate || startDate)
-  const formattedStartDate = new Date(getFormattedDate(startDate, 'UTC'))
-  const formattedEndDate = new Date(getFormattedDate(finishDate, 'UTC'))
-  console.log({ finishDate, formattedEndDate, formattedStartDate, startDate, endDate })
+  const formattedStartDate = new Date(getFormattedDate(startDate))
+  const formattedEndDate = new Date(getFormattedDate(finishDate))
   return dataArray.filter((item) => {
     const [timestamp] = item
     const formattedEntryDateString = getFormattedDate(new Date(timestamp))

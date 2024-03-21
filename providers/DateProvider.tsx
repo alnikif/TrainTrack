@@ -13,7 +13,7 @@ interface DateContextType {
 }
 
 const defaultDateContext: DateContextType = {
-  dateRange: { startDate: new Date('2024-01-01'), endDate: new Date() },
+  dateRange: { startDate: new Date(), endDate: null },
   setDateRange: () => {
     //
   },
@@ -39,7 +39,6 @@ export const DateProvider: React.FC<DateProviderProps> = ({ children }) => {
 export const useDate = () => {
   const { dateRange, setDateRange } = useContext(DateContext)
   const datesList = getDatesList(dateRange.startDate, dateRange.endDate)
-
   return {
     datesList,
     dateRange,

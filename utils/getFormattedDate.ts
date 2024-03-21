@@ -1,12 +1,11 @@
-const getFormattedDate = (date: Date | string, locale?: string) => {
+const getFormattedDate = (date: Date | string) => {
   const currentDate = new Date(date)
   const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-    timeZone: locale || 'UTC',
   }
-  const timeFormat = new Intl.DateTimeFormat(locale, options)
+  const timeFormat = new Intl.DateTimeFormat('en-US', options)
 
   return timeFormat.format(currentDate)
 }
