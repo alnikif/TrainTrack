@@ -6,16 +6,15 @@ import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/Cha
 import { useChart } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
 import { useHeartRateData } from '../../providers/HeartRateDataProvider'
-import getHeartRateChartOptions from '../../utils/getHeartRateChartOptions'
+
+import getHeartRateChartOptions from './getHeartRateChartOptions'
 
 const HeartRateChart = () => {
   const { chartType } = useChart()
   const filteredData = useHeartRateData()
   const { datesList } = useDate()
-  const [isComponentMounted, setIsComponentMounted] = useState(false)
 
-  const options = getHeartRateChartOptions(filteredData, chartType, 'Heart Rate', 'High', datesList)
-
+  const options = getHeartRateChartOptions(filteredData, chartType, 'Heart Rate', datesList)
   return (
     <div>
       <ChartTypesDropdown />

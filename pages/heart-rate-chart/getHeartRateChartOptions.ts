@@ -24,13 +24,7 @@ const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: strin
   ]
 }
 
-function getHeartRateChartOptions(
-  data: ChartDataItem[],
-  chartType: string,
-  title: string,
-  yTitle: string,
-  datesList: string[],
-) {
+function getHeartRateChartOptions(data: ChartDataItem[], chartType: string, yTitle: string, datesList: string[]) {
   const seriesLength = datesList.length
 
   const xAxisLabels = seriesLength > 1 ? datesList : data.map((item) => getDateFormattedTime(item[0]))
@@ -43,7 +37,7 @@ function getHeartRateChartOptions(
     },
 
     title: {
-      text: title,
+      text: 'Heart Rate',
     },
     xAxis: {
       type: 'datetime',
