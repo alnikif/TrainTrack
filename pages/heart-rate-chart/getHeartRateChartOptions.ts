@@ -1,3 +1,5 @@
+import sum from 'lodash/sum'
+
 import { ChartDataItem } from '../../types/chartData'
 import getDateFormattedTime from '../../utils/getDateFormattedTime'
 import getFormattedDate from '../../utils/getFormattedDate'
@@ -18,10 +20,7 @@ const getChartSeries = (data: ChartDataItem[], yTitle: string, datesList?: strin
     {} as Record<string, number[]>,
   )
 
-  return [
-    { name: yTitle, data: Object.values(dateMap).map((item) => item[0]) },
-    { name: yTitle, data: Object.values(dateMap).map((item) => item[1]) },
-  ]
+  return [{ name: yTitle, data: Object.values(dateMap).map((item) => sum(item)) }]
 }
 
 function getHeartRateChartOptions(data: ChartDataItem[], chartType: string, yTitle: string, datesList: string[]) {
@@ -53,7 +52,7 @@ function getHeartRateChartOptions(data: ChartDataItem[], chartType: string, yTit
     },
     series: seriesData,
   }
-  return { options }
+  return options
 }
 
 export default getHeartRateChartOptions

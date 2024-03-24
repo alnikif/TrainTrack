@@ -1,3 +1,5 @@
+import Highcharts from 'highcharts'
+
 import { useChart } from '../../providers/ChartTypesProvider'
 import { useTrainingsData } from '../../providers/TrainingsDataProvider'
 import { ExerciseResult } from '../../types/chartData'
@@ -47,7 +49,14 @@ const useTrainingChartOptions = (datesList: string[], onBarClick: (pointCategory
     plotOptions: {
       series: {
         events: {
-          click: (event: any) => seriesLength > 1 && onBarClick(event.point.category),
+          click: (event: any) => {
+            seriesLength > 1 && onBarClick(event.point.category)
+            if (event.point) {
+              event.point.update({
+                color: 'red',
+              })
+            }
+          },
         },
       },
     },

@@ -14,6 +14,7 @@ const StepsCounterChart = () => {
   const { chartType } = useChart()
   const { datesList } = useDate()
   const { options } = getStepsChartOptions(stepsData, chartType, 'Steps Counter Chart', 'Calories', datesList)
+  console.log(options)
   return (
     <div>
       <ChartTypesDropdown />

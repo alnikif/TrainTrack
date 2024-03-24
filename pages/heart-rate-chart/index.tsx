@@ -15,6 +15,7 @@ const HeartRateChart = () => {
   const { datesList } = useDate()
 
   const options = getHeartRateChartOptions(filteredData, chartType, 'Heart Rate', datesList)
+
   return (
     <div>
       <ChartTypesDropdown />
