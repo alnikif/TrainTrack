@@ -1,48 +1,54 @@
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 import ExerciseList from '../../components/ExerciseList/ExerciseList'
+import { useChart } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
 import { useTrainingsData } from '../../providers/TrainingsDataProvider'
-import { TrainingDetails } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
 
-import useTrainingChartOptions from './getTrainingDataChartOptions'
+import TrainingSessionChart from './TrainingSessionChart'
+import getTrainingChartOptions from './getTrainingDataChartOptions'
 
 const TrainingSessionsChart = () => {
   const { datesList, startDate } = useDate()
-  const { dataMap } = useTrainingsData()
+  const { dataMap, trainingData } = useTrainingsData()
+  const { chartType } = useChart()
 
-  const [trainingDetails, setTrainingDetails] = useState<TrainingDetails[] | null>(null)
+  const [pickedDate, setPickedDate] = useState<Date | null>(null)
 
-  const startDateTraining = useMemo(() => {
-    const dateTrainingKey = getFormattedDate(startDate)
-    return dataMap[dateTrainingKey]
-  }, [dataMap, startDate])
+  const trainingDetails = useMemo(() => {
+    if (!pickedDate) return null
+    return dataMap[getFormattedDate(pickedDate)]
+  }, [dataMap, pickedDate])
 
   useEffect(() => {
     if (datesList.length === 1 && startDate) {
-      setTrainingDetails(startDateTraining)
+      setPickedDate(startDate)
     }
-  }, [datesList, startDate, startDateTraining])
+  }, [startDate])
 
-  const onBarClick = useCallback(
-    (pointCategory: string) => {
-      const pointTraining = dataMap[pointCategory]
-      const targetTraining = datesList.length > 1 ? pointTraining : startDateTraining
-      setTrainingDetails(targetTraining)
-    },
-    [dataMap, datesList, startDateTraining],
-  )
+  const onBarClick = (pickedPoint: any) => {
+    if (datesList.length > 1) {
+      const nextPickedDate = new Date(pickedPoint)
+      if (!Number.isNaN(nextPickedDate.getTime())) {
+        setPickedDate(new Date(pickedPoint))
+      }
+    }
+  }
 
-  const { options } = useTrainingChartOptions(datesList, onBarClick)
+  const options = getTrainingChartOptions({
+    chartType,
+    trainingData,
+    datesList,
+    pickedDate,
+    onBarClick,
+  })
 
   return (
     <>
       <ChartTypesDropdown />
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <TrainingSessionChart options={options} />
       <ExerciseList trainingDetails={trainingDetails || []} />
     </>
   )

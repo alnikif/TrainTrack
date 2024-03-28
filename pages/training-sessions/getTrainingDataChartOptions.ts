@@ -1,71 +1,87 @@
 import Highcharts from 'highcharts'
 
-import { useChart } from '../../providers/ChartTypesProvider'
-import { useTrainingsData } from '../../providers/TrainingsDataProvider'
+import { ChartTypes } from '../../constants/chartTypes'
 import { ExerciseResult } from '../../types/chartData'
 import getFormattedDate from '../../utils/getFormattedDate'
 
 const TITLE = 'Training Chart'
 const Y_TITLE = 'Training'
 
-const getXAxisLabels = (seriesLength: number, trainingData: ExerciseResult[], datesList: string[]) => {
-  if (seriesLength === 1) {
-    const [_, exercises = []] = trainingData?.[0] || []
-    return exercises.map((item) => item.title)
-  }
-
-  return datesList
+interface TrainingChartOptionsParams {
+  chartType: ChartTypes
+  trainingData: ExerciseResult[]
+  datesList: string[]
+  pickedDate: Date | null
+  onBarClick: (pointCategory: Date) => void
 }
 
-const getSeries = (trainingData: ExerciseResult[], seriesLength: number) => {
-  if (seriesLength === 1) {
+const getSeries = (trainingData: ExerciseResult[], datesList: string[], pickedDate: Date | null) => {
+  if (datesList.length === 1) {
     const [_, exercises = []] = trainingData?.[0] || []
-    return [{ name: Y_TITLE, data: exercises.map((item) => item.result) }]
+    return exercises.map((item, index) => ({
+      x: index,
+      y: item.result,
+      name: item.title,
+    }))
   }
 
-  const dateMap = trainingData.reduce(
-    (acc, item) => {
-      const [timestamp, training] = item
-      const formattedDate = getFormattedDate(timestamp)
-      const sumArray = training.map((t) => t.sum)
-      const filteredSumArray = sumArray.filter((item) => item !== undefined) as number[]
-      return { ...acc, [formattedDate]: filteredSumArray }
-    },
-    {} as Record<string, number[]>,
-  )
+  return trainingData.map((item, index) => {
+    const [timestamp, training] = item
+    const summary = training.map((t) => t.sum).find((item) => item !== undefined)
+    const isSelected = pickedDate && pickedDate.toISOString() === timestamp
 
-  return [{ name: Y_TITLE, data: Object.values(dateMap).map((item) => item[0]) }]
+    return {
+      x: index,
+      y: summary,
+      name: timestamp,
+      color: isSelected ? '#6ADC9C' : '#FEC903',
+    }
+  })
 }
 
-const useTrainingChartOptions = (datesList: string[], onBarClick: (pointCategory: string) => void) => {
-  const { chartType } = useChart()
-  const { trainingData, dataMap } = useTrainingsData()
-  const seriesLength = datesList.length
-  const xAxisLabels = getXAxisLabels(seriesLength, trainingData, datesList)
-  const seriesData = getSeries(trainingData, seriesLength)
+const getTrainingChartOptions = (params: TrainingChartOptionsParams): Highcharts.Options => {
+  const { chartType, trainingData, datesList, pickedDate, onBarClick } = params
+  const seriesData = getSeries(trainingData, datesList, pickedDate)
 
-  const options = {
-    chart: { type: chartType, zoomType: 'x' },
-    plotOptions: {
-      series: {
-        events: {
-          click: (event: any) => {
-            seriesLength > 1 && onBarClick(event.point.category)
-            if (event.point) {
-              event.point.update({
-                color: 'red',
-              })
-            }
-          },
-        },
-      },
+  const labelsFormatter = (data: any) => {
+    if (datesList.length === 1) return data.value
+    return getFormattedDate(data.value)
+  }
+
+  const onPointClick = (pointData: any) => {
+    onBarClick(pointData?.point?.name)
+  }
+
+  return {
+    chart: {
+      type: chartType,
+      height: 550,
     },
     title: { text: TITLE },
-    xAxis: { type: 'datetime', title: { text: 'Date' }, categories: xAxisLabels },
-    yAxis: { title: { text: Y_TITLE } },
-    series: seriesData,
+    xAxis: {
+      type: 'category',
+      title: { text: 'Date' },
+      labels: {
+        style: { fontSize: '12px', color: '#697586' },
+        formatter: labelsFormatter,
+      },
+    },
+    yAxis: {
+      title: { text: Y_TITLE },
+      style: { fontSize: '12px', color: '#697586' },
+    } as Highcharts.YAxisOptions,
+    series: [
+      {
+        name: Y_TITLE,
+        colors: ['#FEC903'],
+        borderRadius: '8px',
+        colorByPoint: true,
+        groupPadding: 0,
+        data: seriesData,
+        point: { events: { click: onPointClick } },
+      },
+    ] as Highcharts.SeriesOptionsType[],
   }
-  return { options }
 }
 
-export default useTrainingChartOptions
+export default getTrainingChartOptions
