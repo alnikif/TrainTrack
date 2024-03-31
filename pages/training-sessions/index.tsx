@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 
+import TrainingFormButton from '../../components/Buttons/TrainingFormButton/TrainingFormButton'
 import ChartTypesDropdown from '../../components/Dropdown/ChartTypesDropdown/ChartTypesDropdown'
 import ExerciseList from '../../components/ExerciseList/ExerciseList'
+import TrainingForm from '../../components/TrainingForm/TrainingForm'
 import { useChart } from '../../providers/ChartTypesProvider'
 import { useDate } from '../../providers/DateProvider'
 import { useTrainingsData } from '../../providers/TrainingsDataProvider'
@@ -11,6 +13,7 @@ import TrainingSessionChart from './TrainingSessionChart'
 import getTrainingChartOptions from './getTrainingDataChartOptions'
 
 const TrainingSessionsChart = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const { datesList, startDate } = useDate()
   const { dataMap, trainingData } = useTrainingsData()
   const { chartType } = useChart()
@@ -45,11 +48,15 @@ const TrainingSessionsChart = () => {
     onBarClick,
   })
 
+  const onToggleForm = () => setIsOpen(!isOpen)
+  console.log(isOpen)
   return (
     <>
       <ChartTypesDropdown />
+      <TrainingFormButton onClick={onToggleForm} />
       <TrainingSessionChart options={options} />
       <ExerciseList trainingDetails={trainingDetails || []} />
+      {isOpen && <TrainingForm />}
     </>
   )
 }
